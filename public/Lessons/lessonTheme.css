@@ -2,10 +2,28 @@
     box-sizing: border-box;
 }
 :root{
-    --resultBox-bg-colour: green;
+    --resultBox-bg-colour: ;
+    --nextSectionBtn-bg-colour: ;
 }
 button{
     cursor: pointer;
+    color: white;
+}
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    flex: 1;
+    position: relative;
+    color: black;
 }
 /* HUD */
 .progressBarContainer{
@@ -28,7 +46,7 @@ button{
     cursor: pointer;
     text-decoration: none;
     color: black;
-    transform: scale(1.2) translateY(-6px);
+    transform: scale(1.2) translateY(10px);
     padding: 5px;
     margin-right: 5px;
 }
@@ -37,7 +55,15 @@ button{
 .lessonSection{
     display: none;
     margin-left: 10px;
+    margin-top: 30px;
 }
+.questionData{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 6px;
+    gap: 11px;
+}   
 .imgs{
     width: 200px;
     height: 200px;
@@ -46,28 +72,31 @@ button{
     border: 2px solid rgb(6, 138, 214);
 }
 .resultBox{
+    display: flex;
+    flex-direction: column;
     position: fixed;
-    bottom: -150px;
+    bottom: 0;
     background-color: var(--resultBox-bg-colour);
     padding: 15px;
-    transition: bottom 0.3s ease;
+    transition: transform 0.3s ease;
     width: 100%;
-    height: 150px;
-    margin-left: 0px;
+    height: fit-content;
     z-index: 3;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    transform: translateY(100%);
+    gap: 10px;
+}
+#messages{
+    margin-left: 12px;
 }
 .animated{
-    bottom: 0px;
+    transform: translateY(0);
 }
 .notAnimated{
-    bottom: -150px;
+    transform: translateY(100%);
 }
-body{
-    margin: 0;
-}
-main{
-    position: relative;
-}
+
 #lessonOverlay{
     position: absolute;
     background: transparent;
@@ -75,31 +104,97 @@ main{
     display: none;
 }
 #answerMessage, #messageBox{
-    color: white;
     height: fit-content;
 }
 #userFeedbackBox{
-    float: right;
     display: none;
+    float: right;
+}
+#userFeedbackBox button{
+    border: none;
+    border-radius: 5px;
+    margin-left: 6px;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(255, 66, 66);
+}
+#userFeedbackBox button:hover{
+    box-shadow: 2px 3px rgb(250, 81, 69);
+}
+#userFeedbackBox span{
+    transform: scale(1.4);
 }
 #messages{
     float: left;
 }
 #cancelLessonBox{
+    display: flex;
+    flex-direction: column;
     position: fixed;
-    bottom: -150px;
-    background-color: orange;
+    bottom: 0;
+    background-color: rgb(0, 102, 255);
     padding: 15px;
-    transition: bottom 0.3s ease;
+    transition: transform 0.3s ease;
     width: 100%;
     height: 150px;
     margin-left: 0px;
     z-index: 4;
+    transform: translateY(100%);
+    gap: 5px;
 }
 #cancelLessonBox.notAnimated{
-    bottom: -150px; 
+    transform: translateY(100%);
+}
+#cancelLessonBox.animated{
+    transform: translateY(0);
+}
+#cancelLessonBox button{
+    background-color: rgb(0, 145, 255);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    width: 95vw;
+    border-radius: 18px;
+    align-self: baseline;
+}
+#cancelLessonBox button:hover{
+    box-shadow: 2px 5px rgb(0, 128, 255);
 }
 
-#cancelLessonBox.animated{
-    bottom: 0;      
+.soundBtn{
+    cursor: pointer;
 }
+
+.checkBtn{
+    align-self: center;
+    background-color: rgb(199, 199, 199);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: 95vw;
+    border-radius: 18px;
+    pointer-events: none;
+}
+.answered{
+    pointer-events: all;
+    background-color: rgb(0, 145, 255);
+    box-shadow: 2px 5px rgb(0, 128, 255);
+}
+#nextSectionBtn{
+    background-color: var(--nextSectionBtn-bg-colour);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    width: 95vw;
+    border-radius: 18px;
+    align-self: baseline;
+}
+.nextSectionBtn:hover{
+    box-shadow: 2px 5px rgb(250, 81, 69);
+}
+
+/* TODO update lesson style */
