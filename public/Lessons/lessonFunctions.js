@@ -4,7 +4,7 @@ let answered = false;
 let switchedTo;
 const root = document.documentElement;
 
-// TODO make ids for eahc typed word and prhase, and list of englosh + trnlaiton in lists (e.g.index 0 englsh index1 tamlish)
+// TODO add sounds
 
 // TODO for selection sections make seprate lists with each option id as well as type e.g. image or sound - for each item use indidvial id and check selcted elemtn id against actual id (perhaps set html elemetns id to word id)
 
@@ -19,15 +19,39 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// Fetching vocabulary IDs
+// Fetching data
 let vocab;
+const audioCache = {};
+const imageCache = {}
 
-fetch("../Dictionary/dictionary.json")
-  .then(response => response.json())
-  .then(data => {
+async function fetchLessonData(){
+    const response = await fetch("../Dictionary/dictionary.json");
+    const data = await response.json();
     vocab = data;
-    console.log("fetched vocab ids");
-  });
+
+    const audioFiles = Object.keys(vocab) // gets array of all vocab ids
+      .filter(id => {
+          return ((id.includes("w") || id.includes("p")) && id.startsWith(`t${topic.slice(-1)}`))
+      })
+      .map(id => `../Audio/${id}.mp3`);
+    audioFiles.forEach(src => {
+      const audio = new Audio(src);
+      audio.load();
+      audioCache[src] = audio;
+    })
+      
+    Object.keys(vocab).forEach(id => {
+      if (vocab[id].type === "image"){
+          for (let i = 1; i <= 4; i++){
+              const imagePath = `../Images/${id}/option${i}.png`;
+              const img = new Image();
+              img.src = imagePath;
+              imageCache[imagePath] = img;
+          }
+      }
+    })
+    console.log("fetched lesson data")
+};
 
 
 // Lesson length and topic number
@@ -65,9 +89,12 @@ const lessonHud = document.getElementById("hud");
 const lessonEnd  = document.querySelector(".lesson_end");
 const lessonOverlay = document.getElementById("lessonOverlay");
 
+let displayedSection;
+
 function switchSection(currentSection, nextSection) {
         currentSection.style.display = "none"
         nextSection.style.display = "block"
+        displayedSection = nextSection;
         answered = false;
         resultBox.classList.remove("animated");
         resultBox.classList.add("notAnimated");
@@ -76,30 +103,91 @@ function switchSection(currentSection, nextSection) {
         clicked = 0;
         selectedFeedback = null;
         selectedElement = null;
-        typedEnglishWordPointer.value = "";
+        typedWordPointer.value = "";
         if (nextSection === lessonEnd){
             lessonHud.style.display = "none";
             checkBtn.style.display = "none";
+            lessonEnd.style.display = "flex";
         }
-        // add logic to insert question vocab by id
+        checkBtn.classList.remove("answered");
 };
 
 // Setting question data + audio
+let answerLanguage;
 
-function question(vocabid, wordElement, soundElement, soundBtn, language){
+function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage){
     const wordelement = document.getElementById(wordElement);
-    wordelement.textContent = vocab[vocabid][language];
-    if (soundElement && soundBtn){
-        const soundelement = document.getElementById(soundElement);
-        const soundbtn = document.getElementById(soundBtn);
-        soundelement.src = `../Audio/${vocabid}.mp3`;
-        if (soundbtn){
+
+    if (questionLanguage){
+        if (questionLanguage === "english"){
+            answerLanguage = "tamlish"
+        }
+        else if (questionLanguage === "tamlish"){
+            answerLanguage = "english"
+        }
+    };
+
+    if (selector){
+        // setting selector data e.g. image srcs
+        const option1 = displayedSection.querySelector(".option1");
+        const option2 = displayedSection.querySelector(".option2");
+        const option3 = displayedSection.querySelector(".option3");
+        const option4 = displayedSection.querySelector(".option4");
+        let questionTextID;
+        let sQuestionLanguage;
+        questionTextID = vocab[vocabid].question[0];
+        sQuestionLanguage = vocab[vocabid].question[1];
+        if(soundBtn){
+            const soundbtn = displayedSection.querySelector(`.${soundBtn}`);
+            const audiosrc = `../Audio/${questionTextID}.mp3`;
+            const audio = audioCache[audiosrc];
             soundbtn.onclick = () => {
-                soundelement.play();
+                if (audio){
+                    audio.currentTime = 0;
+                    audio.play();
+                }
             };
         }
+        if (vocab[vocabid].type === "image"){
+            wordelement.textContent = vocab[questionTextID][sQuestionLanguage];
+
+            option1.src = `../Images/${vocabid}/option1.png`;
+            option2.src = `../Images/${vocabid}/option2.png`;
+            option3.src = `../Images/${vocabid}/option3.png`;
+            option4.src = `../Images/${vocabid}/option4.png`;
+        }
+        else if (vocab[vocabid].type === "heardWord"){
+            option1.textContent = vocab[vocab[vocabid].questiondata[0]][sQuestionLanguage];
+            option2.textContent = vocab[vocab[vocabid].questiondata[1]][sQuestionLanguage];
+            option3.textContent = vocab[vocab[vocabid].questiondata[2]][sQuestionLanguage];
+            option4.textContent = vocab[vocab[vocabid].questiondata[3]][sQuestionLanguage];
+        }
     }
-}
+    else{
+        const qLanguage = displayedSection.querySelector(".Qlanguage");
+
+        wordelement.textContent = vocab[vocabid][questionLanguage];
+        
+        if (questionLanguage === "tamlish"){
+            qLanguage.textContent = "English"
+        }
+        else if (questionLanguage === "english"){
+            qLanguage.textContent = "Tamlish"
+        }
+
+        if (soundBtn){
+                const soundbtn = displayedSection.querySelector(`.${soundBtn}`);
+                soundbtn.onclick = () => {
+                    const audiosrc = `../Audio/${vocabid}.mp3`;
+                    const audio = audioCache[audiosrc];
+                    if (audio){
+                        audio.currentTime = 0;
+                        audio.play();
+                    }
+                };
+            }
+    }
+};
 
 // Singular correct element selection logic
 let selectedElement;
@@ -118,7 +206,8 @@ function oneElementSelector(elementsClass, answeroption) {
             selectedElement = element.id;
             console.log(selectedElement);
             answered = true;
-            console.log("answered:", answered)
+            checkBtn.classList.add("answered");
+            console.log("answered:", answered);
         });
     });
 };
@@ -137,9 +226,14 @@ window.addEventListener("keydown", (event) => {
             });
             answered = false;
             selectedElement = null;
+            checkBtn.classList.remove("answered");
         } 
         else if (document.activeElement.tagName === "INPUT"){
             document.activeElement.blur();
+        }
+        else if (cancelLessonBox.classList.contains("animated")){
+            cancelLessonBox.classList.add("notAnimated");
+            cancelLessonBox.classList.remove("animated");
         }
         else{
             cancelLessonBox.classList.remove("notAnimated");
@@ -178,7 +272,7 @@ let sectionState = "answering";
 let vocabData;
 let selectedFeedback;
 const checkBtn = document.querySelector(".checkBtn");
-const typedEnglishWordPointer = document.querySelector(".EnglishTypedWord");
+const typedWordPointer = document.querySelector(".typedWord");
 const resultBox = document.querySelector(".resultBox");
 const messageOverview = document.getElementById("messageBox");
 const answerMessage = document.getElementById("answerMessage");
@@ -191,8 +285,9 @@ function markSection(answerID, questionType, switchedToSectionpointer) {
     switchedToSection = switchedToSectionpointer;
 };
 
-function setResultsBoxColour(colour){
-    root.style.setProperty('--resultBox-bg-colour', colour);
+function setColours(resultsBoxcolour, nextsectionBtncolour){
+    root.style.setProperty("--resultBox-bg-colour", resultsBoxcolour);
+    root.style.setProperty("--nextSectionBtn-bg-colour", nextsectionBtncolour)
 }
 
 function setMessages(messageoverview, answermessage){
@@ -249,45 +344,54 @@ async function addWordtoTopic(answerstatus, vocabID){
     }
 };
 
+typedWordPointer.addEventListener("input", () =>{
+    typedValue = typedWordPointer.value.trim();
+    if (typedValue.length > 0){
+        answered = true;
+        checkBtn.classList.add("answered");
+    }
+    else{
+        answered = false;
+        checkBtn.classList.remove("answered");
+    }
+})
+
 function mark(){
     if (sectionState !== "answering") return; //exits if mark has already been called once
-    if (currentQuestionType === "typedEnglishInput"){
-        currentAnswer = vocab[currentAnswerID].english.toLowerCase().split(" ");
+    if (currentQuestionType === "typedInput"){
+        currentAnswer = vocab[currentAnswerID][answerLanguage].toLowerCase().split(" ");
     }
     else if (currentQuestionType === "selection"){
         currentAnswer = answerOption;
     }
-    typedValue = typedEnglishWordPointer.value.trim();
-    typedEnglishWordPointer.blur(); // deselects input box
-    if (currentQuestionType === "typedEnglishInput" && typedValue.length > 0){
-        answered = true;
-        typedValue = typedValue.toLowerCase().split(" ");
-    }
+    typedValue = typedWordPointer.value.trim();
+    typedWordPointer.blur(); // deselects input box
     if (answered){
         switchedTo = switchedToSection;
         if (currentQuestionType === "selection"){
             // TODO add selector ids and apply marking logic for that
             if (currentAnswer === selectedElement) {
                 console.log("correct");
-                setResultsBoxColour("green");
+                setColours("rgb(5, 149, 15)", "rgb(0, 170, 11)");
                 setMessages("Well Done!","");
                 userFeedbackBox.style.display = "none";
             }
             else{
                 console.log("incorrect");
-                setResultsBoxColour("red");
-                setMessages("Incorrect",`The correct answer was "${currentAnswer[0]}"`);
+                setColours("rgb(230, 0, 35)", "rgb(255, 66, 66)");
+                setMessages("Incorrect",`The correct answer was "${currentAnswer}"`);
                 userFeedbackBox.style.display = "block";
             }
         }
-        else if (currentQuestionType === "typedEnglishInput"){
+        else if (currentQuestionType === "typedInput"){
+            typedValue = typedValue.toLowerCase().split(" ");
             if (typedValue.length === currentAnswer.length){
                 correctLength = true;
             }
             else{
                 correctLength = false;
                 console.log("incorrect");
-                setResultsBoxColour("red");
+                setColours("rgb(230, 0, 35)", "rgb(255, 66, 66)");
                 setMessages("Incorrect",`The correct answer was "${currentAnswer.join(" ")}"`);
                 userFeedbackBox.style.display = "block";
                 addWordtoTopic("incorrect", currentAnswerID);
@@ -304,21 +408,21 @@ function mark(){
                 console.log("edit distance: ", editDistance);
                 if (editDistance === 1){
                     console.log("correct");
-                    setResultsBoxColour("green");
+                    setColours("rgb(5, 149, 15)", "rgb(0, 170, 11)");
                     setMessages("Well Done!","");
                     userFeedbackBox.style.display = "none";
                     addWordtoTopic("mostlyCorrect", currentAnswerID);
                 }
                 else if (editDistance === 0){
                     console.log("correct");
-                    setResultsBoxColour("green");
+                    setColours("rgb(5, 149, 15)", "rgb(0, 170, 11)");
                     setMessages("Perfect","");
                     userFeedbackBox.style.display = "none";
                     addWordtoTopic("correct", currentAnswerID);
                 }
                 else{
                     console.log("incorrect");
-                    setResultsBoxColour("red");
+                    setColours("rgb(230, 0, 35)", "rgb(255, 66, 66)");
                     setMessages("Incorrect",`The correct answer was "${currentAnswer.join(" ")}"`);
                     userFeedbackBox.style.display = "block";
                     addWordtoTopic("incorrect", currentAnswerID);
@@ -394,7 +498,7 @@ function switchedSectionTo(){
 }
 
 // Exporting Functions
-export { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, question };
+export { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, questionData, fetchLessonData };
 
 
 

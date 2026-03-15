@@ -54,7 +54,6 @@ main{
 /* Main content */
 .lessonSection{
     display: none;
-    margin-left: 10px;
     margin-top: 30px;
 }
 .questionData{
@@ -70,6 +69,7 @@ main{
 }
 .clicked{
     border: 2px solid rgb(6, 138, 214);
+    border-radius: 7px;
 }
 .resultBox{
     display: flex;
@@ -119,7 +119,7 @@ main{
     background-color: rgb(255, 66, 66);
 }
 #userFeedbackBox button:hover{
-    box-shadow: 2px 3px rgb(250, 81, 69);
+    box-shadow: 2px 4px color-mix(in srgb , rgb(255, 66, 66) 75%, black);
 }
 #userFeedbackBox span{
     transform: scale(1.4);
@@ -132,7 +132,7 @@ main{
     flex-direction: column;
     position: fixed;
     bottom: 0;
-    background-color: rgb(0, 102, 255);
+    background-color: rgb(58, 133, 255);
     padding: 15px;
     transition: transform 0.3s ease;
     width: 100%;
@@ -141,6 +141,8 @@ main{
     z-index: 4;
     transform: translateY(100%);
     gap: 5px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
 }
 #cancelLessonBox.notAnimated{
     transform: translateY(100%);
@@ -149,7 +151,7 @@ main{
     transform: translateY(0);
 }
 #cancelLessonBox button{
-    background-color: rgb(0, 145, 255);
+    background-color: rgb(0, 157, 255);
     border: none;
     text-align: center;
     padding: 15px;
@@ -159,9 +161,12 @@ main{
     align-self: baseline;
 }
 #cancelLessonBox button:hover{
-    box-shadow: 2px 5px rgb(0, 128, 255);
+    box-shadow: 2px 5px color-mix(in srgb, rgb(0, 157, 255) 78%, black);
 }
-
+#cancelLessonBox button:active{
+    top: 3px;
+    box-shadow: 2px 2px color-mix(in srgb, rgb(0, 157, 255) 78%, black);
+}
 .soundBtn{
     cursor: pointer;
 }
@@ -178,10 +183,17 @@ main{
     border-radius: 18px;
     pointer-events: none;
 }
+
 .answered{
     pointer-events: all;
     background-color: rgb(0, 145, 255);
+}
+.answered:hover{
     box-shadow: 2px 5px rgb(0, 128, 255);
+}
+.answered:active{
+    top: 3px;
+    box-shadow: 2px 2px rgb(0, 128, 255);
 }
 #nextSectionBtn{
     background-color: var(--nextSectionBtn-bg-colour);
@@ -193,8 +205,54 @@ main{
     border-radius: 18px;
     align-self: baseline;
 }
-.nextSectionBtn:hover{
-    box-shadow: 2px 5px rgb(250, 81, 69);
+#nextSectionBtn:hover{
+    box-shadow: 2px 5px color-mix(in srgb, var(--nextSectionBtn-bg-colour) 75%, black);
 }
-
-/* TODO update lesson style */
+#nextSectionBtn:active{
+    top: 3px;
+    box-shadow: 2px 2px color-mix(in srgb, var(--nextSectionBtn-bg-colour) 75%, black);
+}
+.choose_heard_word .questionData{
+    display: flex;
+    justify-content: center;
+}
+.heardWords{
+    text-align: center;
+    padding: 6px;
+    width: fit-content;
+}
+.choose_heard_word .options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.options{
+    cursor: pointer;
+}
+.lesson_end{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+#endLessonBtn{
+    align-self: center;
+    background-color: rgb(37, 125, 239);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: 95vw;
+    border-radius: 18px;
+    transition: ease-in-out ;
+}
+#endLessonBtn:hover{
+    box-shadow: 2px 5px rgb(10, 97, 211);
+}
+#endLessonBtn:active{
+    top: 3px;
+    box-shadow: 2px 3px rgb(10, 97, 211);
+}

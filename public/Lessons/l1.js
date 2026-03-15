@@ -1,9 +1,9 @@
-import { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, question } from "./lessonFunctions.js"; 
+import { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, questionData, fetchLessonData } from "./lessonFunctions.js"; 
 
-const continueBtn = document.querySelector(".nextSectionBtn");
+const continueBtn = document.getElementById("nextSectionBtn");
 const imageSection = document.querySelector(".choose_picture");
 const pickHeardWord = document.querySelector(".choose_heard_word");
-const writeEnglishWord = document.querySelector(".write_EnglishWord")
+const writeWord = document.querySelector(".writeWord")
 const lessonEnd  = document.querySelector(".lesson_end");
 const lessonTime = document.getElementById("lessonTime");
 let time;
@@ -11,36 +11,44 @@ let time;
 // TODO add selector ids
 
 lessonDetails(4,"topic1", "lesson1");
-timer("start");
 
-// Pick the correct image section
-switchSection(lessonEnd,imageSection)
-oneElementSelector("imgs","img2");
-markSection("", "selection", "pickHeardWord");
+async function startLesson(){
+    await fetchLessonData();
+    timer("start");
+    switchSection(lessonEnd,imageSection)
+    // Pick the correct image section
+    oneElementSelector("imgs","img2");
+    questionData("t1s1",true,"question1","soundBtn",null)
+    markSection("", "selection", "pickHeardWord");
+}
+
+startLesson();
 
 function continueLesson(){
     if (switchedSectionTo() === "pickHeardWord"){
         // Pick the correct heard word section
         switchSection(imageSection, pickHeardWord)
+        questionData("t1s2", true, "question2", "soundBtn","null")
         oneElementSelector("heardWords","heardWord2")
         markSection("","selection", "writeEnglishWord1")
     }
     else if (switchedSectionTo() === "writeEnglishWord1"){
         // Write the english word section
-        switchSection(pickHeardWord, writeEnglishWord)
-        question("t1w1","question3", null, null, "english")
-        markSection("t1w1","typedEnglishInput","writeEnglishWord2")
+        switchSection(pickHeardWord, writeWord)
+        questionData("t1w1", false, "question3", "soundBtn", "tamlish")
+        markSection("t1w1","typedInput","writeTamlishWord1")
     }
-    else if (switchedSectionTo() === "writeEnglishWord2"){
+    else if (switchedSectionTo() === "writeTamlishWord1"){
         // Write the english word section
-        switchSection(pickHeardWord, writeEnglishWord)
-        markSection("t1w2","typedEnglishInput","lessonEnd")
+        switchSection(writeWord, writeWord)
+        questionData("t1w1", false, "question3", "soundBtn", "english")
+        markSection("t1w1","typedInput","lessonEnd")
     }
     else if (switchedSectionTo() === "lessonEnd"){
         // End of the lesson
         time = Math.floor(timer("stop")/1000);
         lessonTime.textContent = time + 's';
-        switchSection(writeEnglishWord, lessonEnd)
+        switchSection(writeWord, lessonEnd)
     }
 };
 

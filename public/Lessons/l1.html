@@ -19,67 +19,93 @@
         </div>
     </div>
     <main>
-
         <br>
         <div class="choose_picture lessonSection">
-            pick the correct picture <br>
-            <div id="question1"></div>
-            <img type="image/png" src="../Images/img1.png" alt="" class="imgs" id="img1">
-            <img type="image/png" src="../Images/img2.jpg" alt="" class="imgs" id="img2"><br>
-            <img type="image/png" src="../Images/img3.png" alt="" class="imgs" id="img3">
-            <img type="image/png" src="../Images/img4.png" alt="" class="imgs" id="img4">
+            Pick the correct picture: <br>
+            <div class="questionData">
+                <span class="material-symbols-outlined soundBtn">volume_up</span>
+                <div id="question1"></div>
+            </div>
+            <div class="options">
+                <img type="image/png" alt="" class="imgs option1" id="img1">
+                <img type="image/png" alt="" class="imgs option2" id="img2"><br>
+                <img type="image/png" alt="" class="imgs option3" id="img3">
+                <img type="image/png" alt="" class="imgs option4" id="img4">
+            </div>
         </div>
 
         <div class="choose_heard_word lessonSection">
-            Pick correct word that you hear <br>
-            <div class="heardWords" id="heardWord1">Word 1</div>
-            <div class="heardWords" id="heardWord2">Word 2</div>
-            <div class="heardWords" id="heardWord3">Word 3</div>
-            <div class="heardWords" id="heardWord4">Word 4</div>
+            Pick the word that you hear <br>
+            <div class="questionData">
+                <span class="material-symbols-outlined soundBtn">volume_up</span>
+                <div id="question2"></div>
+            </div>
+            <div class="options">
+                <div class="heardWords option1" id="heardWord1">Word 1</div><br>
+                <div class="heardWords option2" id="heardWord2">Word 2</div><br>
+                <div class="heardWords option3" id="heardWord3">Word 3</div><br>
+                <div class="heardWords option4" id="heardWord4">Word 4</div>
+            </div>
         </div>
 
-        <div class="write_EnglishWord lessonSection">
-            type the word in english <br>
-            <div id="question3"></div>
-            <div class="TamlishWordToType"></div>
-            <input class="EnglishTypedWord" type="text" autocomplete="off">
+        <div class="writeWord lessonSection">
+            Translate into <span class="Qlanguage"></span> <br>
+            <div class="questionData">
+                <span class="material-symbols-outlined soundBtn">volume_up </span>
+                <div id="question3"></div>
+            </div>
+            <div class="wordToType"></div>
+            <input class="typedWord" type="text" autocomplete="off">
         </div>
 
         <div id="lessonOverlay"></div>
-
         <button class="checkBtn">Check</button>
-        <div class="resultBox">
-            <div id="results">
-                <div id="messages">
-                    <div id="messageBox"></div>
-                    <div id="answerMessage"></div>
-                </div>
-                <div id="userFeedbackBox">
-                    <button id="goodProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
-                            sentiment_satisfied
-                        </span></button>
-                    <button id="neutralProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
-                            sentiment_neutral
-                        </span></button>
-                    <button id="badProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
-                            sentiment_dissatisfied
-                        </span></button>
-                </div>
-            </div>
-            <br><br>
-            <button class="nextSectionBtn">Next</button>
-        </div>
-        <div id="cancelLessonBox">
-            Are you sure you want to to leave the lesson?
-            <button id="cancelBtn">Cancel</button>
-            <button id="quitLessonBtn">Continue</button>
-        </div>
+
+
         <div class="lesson_end lessonSection">
             end of lesson
+            <div id="funFact"></div>
             <div id="lessonTime"></div>
+            <table id="questionMarks">
+                <caption>Question Results:</caption>
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
             <button id="endLessonBtn">Finish</button>
         </div>
     </main>
+    <div class="resultBox">
+        <div id="results">
+            <div id="messages">
+                <div id="messageBox"></div>
+                <div id="answerMessage"></div>
+            </div>
+            <div id="userFeedbackBox">
+                <button id="goodProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
+                        sentiment_satisfied
+                    </span></button>
+                <button id="neutralProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
+                        sentiment_neutral
+                    </span></button>
+                <button id="badProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
+                        sentiment_dissatisfied
+                    </span></button>
+            </div>
+        </div>
+        <br><br><br>
+        <button id="nextSectionBtn">Next</button>
+    </div>
+    <div id="cancelLessonBox">
+        Are you sure you want to to leave the lesson?<br>
+        <button id="cancelBtn">No</button><br>
+        <button id="quitLessonBtn">Yes</button>
+    </div>
 
     <script type="module"> import damerauLevenshtein from 'https://cdn.jsdelivr.net/npm/damerau-levenshtein@1.0.8/+esm'; window.levenshtein = damerauLevenshtein; </script>
     <script src="lessonFunctions.js" type="module"></script>

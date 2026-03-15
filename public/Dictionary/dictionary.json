@@ -7,8 +7,27 @@
         "english": "Thank you",
         "tamlish": "Nandri"
     },
+    "t1w3":{
+        "english": "Goodbye",
+        "tamlish": "Taataa"
+    },
+    "t1w4":{
+        "english": "Please",
+        "tamlish": "Tayavuceytu"
+    },
     "t1p1":{
         "english": "How are you",
         "tamlish": "Yepperdi irriku"
+    },
+    "t1s1":{
+        "type": "image",
+        "answer": "option2",
+        "question": ["t1w1","tamlish"]
+    },
+    "t1s2":{
+        "type": "heardWord",
+        "answer": "option4",
+        "question": ["t1w1","tamlish"],
+        "questiondata": ["t1w1","t1w2","t1w3","t1w4"]
     }
 }
