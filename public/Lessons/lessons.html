@@ -52,7 +52,7 @@
             <ul id="utilities">
                 <li><a href="lessons.html" id="lessonsBtn">Lessons</a></li>
                 <li><a href="../Dictionary/dictionary.html" id="dictionaryBtn">Dictionary</a></li>
-                <li><a href="../Settings/settings.html" id="settingsBtn">Settings</a></li>
+                <li id="settingsLi"><a href="../Settings/settings.html" id="settingsBtn">Settings</a></li>
                 <li id="wrapper">
                     <div id="pointer"><a id="loginBtn">Sign in</a></div>
                     <div id="statsGUI">
@@ -68,21 +68,28 @@
 
     <main>
 
-        <a id="l1Banner" href="l1.html">
+        <a id="exampleLessonBanner" href="l1.html">
+            <div class="lessonBanner">
+                Example Lesson
+                <hr>
+                Lesson sections
+            </div>
+        </a><br>
+        <a id="l1Banner" href="l1.html" class="actualLessons">
             <div class="lessonBanner">
                 Lesson 1
                 <hr>
                 Basic Vocabulary
             </div>
         </a><br>
-        <a id="l2Banner" href="l2.html">
+        <a id="l2Banner" href="l2.html" class="actualLessons">
             <div class="lessonBanner">
                 Lesson 2
                 <hr>
                 Basic Vocabulary
             </div>
         </a><br>
-        <a id="l3Banner" href="l3.html">
+        <a id="l3Banner" href="l3.html" class="actualLessons">
             <div class="lessonBanner">
                 Lesson 3
                 <hr>
@@ -100,6 +107,7 @@
     </footer>
 
     <script src="../index.js" type="module"></script>
+    <script src="lessons.js" type="module"></script>
 
 </body>
 

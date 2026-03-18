@@ -30,8 +30,16 @@ a{
     border-radius: 10px;
     padding: 5px;
 }
-
+#exampleLessonBanner{
+    display: none;
+}
 .lessonBanner:hover{
     box-shadow: 2px 5px black;
+}
+.greyedOut{
+    pointer-events: none;
+}
+.greyedOut .lessonBanner{
+    background-color: gray;
 }
 
