@@ -44,9 +44,12 @@ header{
 }
 .navbar #utilities{
     list-style-type: none;
-    display: flex;
-    gap: 40px;
+    display: none;
+    gap: 0px;
     margin-right: 8px;
+}
+.navbar #utilities li{  
+    margin-left: 40px;
 }
 .navbar #utilities a{
     text-decoration: none;
@@ -89,9 +92,9 @@ header{
 }
 
 #wrapper{
-    min-width: 18ch;
     text-align: center;
-    margin-right: 0;
+    margin-right: 40px;
+    min-width: none;
 }
 #wrapper1{
     min-width: 18ch;
@@ -113,6 +116,7 @@ header{
 }
 #pointer{
     cursor: pointer;
+    min-width: none;
 }
 #statsexitBtn{
     cursor: pointer;

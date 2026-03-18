@@ -17,7 +17,7 @@ const sign_in_email = loginpg.querySelector("input[type='email']");
 const sign_in_password = loginpg.querySelector("input[type='password']");
 const sign_up_email = signuppg.querySelector("input[type='email']");
 const sign_up_password = signuppg.querySelector("input[type='password']");
-
+const utilitiesNavbar = document.getElementById("utilities");
 
 const errorpage1 = document.getElementById("errorPage1")
 const errorpage2 = document.getElementById("errorPage2")
@@ -114,8 +114,12 @@ onAuthStateChanged(auth, (user) => {
       wrapper.id = "wrapper1"
       const wrapper1 = document.getElementById("wrapper1")
       const stats = document.getElementById('statsGUI');
+      wrapper1.style.minWidth = "18ch";
 
       const statsexitBtn = document.getElementById("statsexitBtn")
+
+      utilitiesNavbar.style.display = "flex";
+
       wrapper1.addEventListener("click", () => {
         if (auth.currentUser){
           stats.style.display = "block"
@@ -135,6 +139,7 @@ onAuthStateChanged(auth, (user) => {
             signinBtn.textContent = "Sign In"
             wrapper.id = "wrapper"
             stats.style.display = "none"
+            wrapper.style.minWidth = "";
             signinBtn.style.visibility = "visible";
           })
           .catch((error) => {
@@ -145,6 +150,7 @@ onAuthStateChanged(auth, (user) => {
   }
   else {
     signinBtn.style.visibility = "visible";
+    utilitiesNavbar.style.display = "flex";
   }
 })
 

@@ -11,9 +11,9 @@ const emailInput = document.getElementById("emailChange");
 onAuthStateChanged(auth, (user) => {
     if (user != null) {
         user.providerData.forEach((profile) => {
-            if (profile.providerId === "google.com") {
-                emailSection.style.display = "none"
-                passwordSection.style.display = "none"
+            if (profile.providerId !== "google.com") {
+                emailSection.style.display = "block"
+                passwordSection.style.display = "block"
             }
         });
     }
@@ -89,19 +89,3 @@ resetPasswordBtn.addEventListener("click", () => {
             alert(error.message);
         });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

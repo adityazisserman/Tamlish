@@ -13,6 +13,7 @@ let wordsArray = [];
 let phrasesArray = [];
 let fuseWords;
 let fusePhrases;
+// add laoding scrren + no searhc results + no vocab leartn when not singed in
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -32,7 +33,11 @@ onAuthStateChanged(auth, async (user) => {
           populateTable(phrasesArray, phrasesTableBody);
           fuseWords = new Fuse(wordsArray, options);
           fusePhrases = new Fuse(phrasesArray, options);
-        };
+    }
+    else{
+        const settingsLi = document.getElementById("settingsLi");
+        settingsLi.style.display = "none";
+    }
 });
 
 wordsSwitchBtn.addEventListener("click", () => {
@@ -130,3 +135,4 @@ backBtn.addEventListener("click", () => {
     backBtn.style.display = "none";
     searchQuery.value = "";
 })
+
