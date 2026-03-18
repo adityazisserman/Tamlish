@@ -26,3 +26,6 @@ main{
 #backBtn{
     display: none;
 }
+.soundBtns{
+    cursor: pointer;
+}

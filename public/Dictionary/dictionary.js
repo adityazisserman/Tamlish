@@ -11,6 +11,7 @@ let currentUser = null;
 let vocab = {}; 
 let wordsArray = [];
 let phrasesArray = [];
+const audioCache = {};
 let fuseWords;
 let fusePhrases;
 // add laoding scrren + no searhc results + no vocab leartn when not singed in
@@ -28,11 +29,19 @@ onAuthStateChanged(auth, async (user) => {
             else if (id.includes("p")){
                 phrasesArray.push({ id: id, proficiency: vocabProficiencyData[id], english: vocab[id].english, tamlish: vocab[id].tamlish });
             }
-          }
-          populateTable(wordsArray, wordsTableBody);
-          populateTable(phrasesArray, phrasesTableBody);
-          fuseWords = new Fuse(wordsArray, options);
-          fusePhrases = new Fuse(phrasesArray, options);
+        }
+
+        for (let id in vocab) {
+            if (id.includes("w") || id.includes("p")){
+                const audio = new Audio(`../Audio/${id}.mp3`);
+                audio.load();
+                audioCache[id] = audio;
+            }
+        };
+        populateTable(wordsArray, wordsTableBody);
+        populateTable(phrasesArray, phrasesTableBody);
+        fuseWords = new Fuse(wordsArray, options);
+        fusePhrases = new Fuse(phrasesArray, options);
     }
     else{
         const settingsLi = document.getElementById("settingsLi");
@@ -68,6 +77,15 @@ async function loadVocabProficiency(){
 }
 
 
+
+function playAudio(vocabid){
+    const audio = audioCache[vocabid];
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+    }
+};
+
 function populateTable(array, table) {
     table.innerHTML = "";
 
@@ -76,10 +94,14 @@ function populateTable(array, table) {
         row.id = item.id;
 
         const listenCell = document.createElement("td");
-        const icon = document.createElement("span");
-        icon.className = "material-symbols-outlined";
-        icon.textContent = "volume_up";
-        listenCell.appendChild(icon);
+        const soundBtn = document.createElement("span");
+        soundBtn.className = "material-symbols-outlined";
+        soundBtn.classList.add("soundBtns");
+        soundBtn.textContent = "volume_up";
+        soundBtn.addEventListener("click", () => {
+            playAudio(item.id);
+        });
+        listenCell.appendChild(soundBtn);
         row.appendChild(listenCell);
 
         const englishCell = document.createElement("td");
@@ -91,7 +113,7 @@ function populateTable(array, table) {
         row.appendChild(tamlishCell);
 
         const proficencyCell = document.createElement("td");
-        proficencyCell.textContent = vocabProficiencyData[item.id];
+        proficencyCell.textContent = vocabProficiencyData[item.id] ?? "N/A";
         row.appendChild(proficencyCell);
         
         table.appendChild(row);
