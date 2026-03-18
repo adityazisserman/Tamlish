@@ -52,3 +52,6 @@ main{
     transform: scale(1.4);
     cursor: pointer;
 }
+#emailSection, #passwordSection{
+    display: none;
+}
