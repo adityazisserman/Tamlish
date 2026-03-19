@@ -17,11 +17,6 @@ onAuthStateChanged(auth, (user) => {
             }
         });
     }
-    else {
-        usernameSection.style.display = "none";
-        emailSection.style.display = "none";
-        passwordSection.style.display = "none";
-    }
 });
 
 
