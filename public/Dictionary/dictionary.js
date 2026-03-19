@@ -7,13 +7,20 @@ const phrasesTable = document.getElementById("phrasesTable");
 const wordsSwitchBtn = document.getElementById("wordsSwitchBtn");
 const phrasesSwitchBtn = document.getElementById("phrasesSwitchBtn");
 const backBtn = document.getElementById("backBtn");
-let currentUser = null;
+const wordsTableMessageBox = document.getElementById("wordsTableMessage");
+const phrasesTableMessageBox = document.getElementById("phrasesTableMessage");
+const audioCache = {};
 let vocab = {}; 
 let wordsArray = [];
 let phrasesArray = [];
-const audioCache = {};
+let currentWordsResults = [];
+let currentPhrasesResults = [];
+let currentUser = null;
 let fuseWords;
 let fusePhrases;
+let activeTab;
+let isSearchActive;
+let messageBox;
 
 // TODO add laoding scrren + no searhc results + no vocab leartn when not singed in, as well as potentially caching vocab so loading time improves.
 
@@ -27,6 +34,7 @@ const APP_VERSION = "1.0"
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
+        activeTab = "words";
         const userDoc = await getDoc(doc(db, "users", currentUser.uid));
         const serverVocabVersion = userDoc.data()?.vocabLastUpdatedTimestamp ?? null;
         const localVocabVersion = localStorage.getItem(tableCache.vocabVersion);
@@ -72,21 +80,55 @@ onAuthStateChanged(auth, async (user) => {
         populateTable(phrasesArray, phrasesTableBody);
         fuseWords = new Fuse(wordsArray, options);
         fusePhrases = new Fuse(phrasesArray, options);
+        updateMessage(wordsArray, phrasesArray, false);
     }
     else{
         const settingsLi = document.getElementById("settingsLi");
         settingsLi.style.display = "none";
+        wordsTableMessageBox.textContent = "Sign in to view your vocab";
+        activeTab = "words";
     }
 });
 
 wordsSwitchBtn.addEventListener("click", () => {
-  wordsTable.style.display = "block";
-  phrasesTable.style.display = "none";
+    wordsTable.style.display = "block";
+    phrasesTable.style.display = "none";
+    wordsTableMessageBox.style.display = "block";
+    phrasesTableMessageBox.style.display = "none";
+    activeTab = "words";
+    if (!currentUser && isSearchActive){ 
+        wordsTableMessageBox.textContent = "Sign in to search your vocab";
+        return; 
+    }
+    else if (!currentUser && !isSearchActive){
+        wordsTableMessageBox.textContent = "Sign in to view your vocab";
+        return; 
+    }    updateMessage(
+        isSearchActive ? currentWordsResults : wordsArray,
+        isSearchActive ? currentPhrasesResults : phrasesArray,
+        isSearchActive
+    )
 });
 
 phrasesSwitchBtn.addEventListener("click", () => {
-  wordsTable.style.display = "none";
-  phrasesTable.style.display = "block";
+    wordsTable.style.display = "none";
+    phrasesTable.style.display = "block";
+    wordsTableMessageBox.style.display = "none";
+    phrasesTableMessageBox.style.display = "block";
+    activeTab = "phrases"
+    if (!currentUser && isSearchActive){ 
+        phrasesTableMessageBox.textContent = "Sign in to search your vocab";
+        return; 
+    }
+    else if (!currentUser && !isSearchActive){
+        phrasesTableMessageBox.textContent = "Sign in to view your vocab";
+        return; 
+    }
+    updateMessage(
+        isSearchActive ? currentWordsResults : wordsArray,
+        isSearchActive ? currentPhrasesResults : phrasesArray,
+        isSearchActive
+    )
 });
 
 let vocabProficiencyData = [];
@@ -160,14 +202,22 @@ const options = {
 };
 
 function search(query){
-    const wordsResults = fuseWords.search(query).map(result => result.item); // only gets the results not other data like score
-    const phrasesResults = fusePhrases.search(query).map(result => result.item);
-    populateTable(wordsResults, wordsTableBody);
-    populateTable(phrasesResults, phrasesTableBody);
-    backBtn.style.display = "block";
-
-  console.log("Words:", wordsResults);
-  console.log("Phrases:", phrasesResults);
+    isSearchActive = true;
+    if (currentUser){
+        currentWordsResults = fuseWords.search(query).map(result => result.item); // only gets the  results not other data like score
+        currentPhrasesResults = fusePhrases.search(query).map(result => result.item);
+        populateTable(currentWordsResults, wordsTableBody);
+        populateTable(currentPhrasesResults, phrasesTableBody);
+        backBtn.style.display = "block";
+        updateMessage(currentWordsResults, currentPhrasesResults, true);
+        console.log("Words:", currentWordsResults);
+        console.log("Phrases:", currentPhrasesResults);
+    }
+    else{
+        backBtn.style.display = "block";
+        messageBox = activeTab === "words" & isSearchActive ? wordsTableMessageBox : phrasesTableMessageBox;
+        messageBox.textContent = "Sign in to search your vocab";
+    }
 };
 
 const searchBtn = document.getElementById("searchBtn");
@@ -183,9 +233,32 @@ searchBtn.addEventListener("click", () => {
 });
 
 backBtn.addEventListener("click", () => {
-    populateTable(wordsArray, wordsTableBody);
-    populateTable(phrasesArray, phrasesTableBody);
+    isSearchActive = false;
     backBtn.style.display = "none";
     searchQuery.value = "";
+    if (!currentUser){
+        messageBox = activeTab === "words" ? wordsTableMessageBox : phrasesTableMessageBox;
+        messageBox.textContent = "Sign in to view your vocab";
+        return;
+    }
+    populateTable(wordsArray, wordsTableBody);
+    populateTable(phrasesArray, phrasesTableBody);
+    updateMessage(wordsArray, phrasesArray, false)
 }); 
+
+function updateMessage(wordsData, phrasesData, isSearch = false){
+    if (activeTab === "words"){
+        if (wordsData.length === 0){
+            wordsTableMessageBox.textContent = isSearch ? "No words found" : "No words learned yet";
+        } else {
+            wordsTableMessageBox.textContent = "";
+        }
+    } else {
+        if (phrasesData.length === 0){
+            phrasesTableMessageBox.textContent = isSearch ? "No phrases found" : "No phrases learned yet";
+        } else {
+            phrasesTableMessageBox.textContent = "";
+        }
+    }
+}
 
