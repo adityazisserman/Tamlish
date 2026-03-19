@@ -63,21 +63,22 @@
 
 
         <div class="lesson_end lessonSection">
-            end of lesson
-            <div id="funFact"></div>
-            <div id="lessonTime"></div>
+            End of the lesson
+            <div id="funFact">Fun Fact! ""</div>
+            <div id="lessonTime"></div><br>
+            Question Marks:
             <table id="questionMarks">
-                <caption>Question Results:</caption>
                 <thead>
-                    <tr>
-                        <th>Question</th>
-                        <th>Result</th>
-                    </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
+            <div id="average"></div>
             <button id="endLessonBtn">Finish</button>
+        </div>
+        <div id="exampleLessonSection">
+            <div id="exampleLessonText">This was an example lesson, if you would like to continue learning, please sign in or sign up, in order for progress to be saved</div> <br> <button
+                id="exitExampleBtn">Exit</button>
         </div>
     </main>
     <div class="resultBox">
@@ -85,15 +86,16 @@
             <div id="messages">
                 <div id="messageBox"></div>
                 <div id="answerMessage"></div>
+                <div id="selectorMessage"></div>
             </div>
             <div id="userFeedbackBox">
-                <button id="goodProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
+                <button id="goodProficiencyBtn" class="feedbackBtn" title="Good proficiency"><span class="material-symbols-outlined">
                         sentiment_satisfied
                     </span></button>
-                <button id="neutralProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
+                <button id="neutralProficiencyBtn" class="feedbackBtn" title="Neutral proficiency"><span class="material-symbols-outlined">
                         sentiment_neutral
                     </span></button>
-                <button id="badProficiencyBtn" class="feedbackBtn"><span class="material-symbols-outlined">
+                <button id="badProficiencyBtn" class="feedbackBtn" title="Bad proficiency"><span class="material-symbols-outlined">
                         sentiment_dissatisfied
                     </span></button>
             </div>

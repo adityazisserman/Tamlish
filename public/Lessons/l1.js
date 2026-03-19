@@ -1,4 +1,4 @@
-import { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, questionData, fetchLessonData } from "./lessonFunctions.js"; 
+import { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, questionData, fetchLessonData, questionResults } from "./lessonFunctions.js"; 
 
 const continueBtn = document.getElementById("nextSectionBtn");
 const imageSection = document.querySelector(".choose_picture");
@@ -6,9 +6,6 @@ const pickHeardWord = document.querySelector(".choose_heard_word");
 const writeWord = document.querySelector(".writeWord")
 const lessonEnd  = document.querySelector(".lesson_end");
 const lessonTime = document.getElementById("lessonTime");
-let time;
-
-// TODO add selector ids
 
 lessonDetails(4,"topic1", "lesson1");
 
@@ -17,9 +14,9 @@ async function startLesson(){
     timer("start");
     switchSection(lessonEnd,imageSection)
     // Pick the correct image section
-    oneElementSelector("imgs","img2");
+    oneElementSelector("imgs");
     questionData("t1s1",true,"question1","soundBtn",null)
-    markSection("", "selection", "pickHeardWord");
+    markSection("t1s1", "selection", "pickHeardWord");
 }
 
 startLesson();
@@ -29,8 +26,8 @@ function continueLesson(){
         // Pick the correct heard word section
         switchSection(imageSection, pickHeardWord)
         questionData("t1s2", true, "question2", "soundBtn","null")
-        oneElementSelector("heardWords","heardWord2")
-        markSection("","selection", "writeEnglishWord1")
+        oneElementSelector("heardWords")
+        markSection("t1s2","selection", "writeEnglishWord1")
     }
     else if (switchedSectionTo() === "writeEnglishWord1"){
         // Write the english word section
@@ -46,8 +43,8 @@ function continueLesson(){
     }
     else if (switchedSectionTo() === "lessonEnd"){
         // End of the lesson
-        time = Math.floor(timer("stop")/1000);
-        lessonTime.textContent = time + 's';
+        lessonTime.textContent = `Time taken: ${timer("stop")}`;
+        questionResults();
         switchSection(writeWord, lessonEnd)
     }
 };

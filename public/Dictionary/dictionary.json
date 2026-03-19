@@ -28,6 +28,6 @@
         "type": "heardWord",
         "answer": "option4",
         "question": ["t1w1","tamlish"],
-        "questiondata": ["t1w1","t1w2","t1w3","t1w4"]
+        "questiondata": ["t1w4","t1w2","t1w3","t1w1"]
     }
 }

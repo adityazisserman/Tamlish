@@ -4,9 +4,6 @@ let answered = false;
 let switchedTo;
 const root = document.documentElement;
 
-// TODO add sounds
-
-// TODO for selection sections make seprate lists with each option id as well as type e.g. image or sound - for each item use indidvial id and check selcted elemtn id against actual id (perhaps set html elemetns id to word id)
 
 // * lesson section types {current: imagesection, pickheardword, writeEnglishWord, lessonEnd } (new: writeTamlishWord, pickwrittenword, picksoundheardword)
 
@@ -40,7 +37,7 @@ async function fetchLessonData(){
       audioCache[src] = audio;
     })
       
-    Object.keys(vocab).forEach(id => {
+    Object.keys(vocab).filter(id => id.startsWith(`t${topic.slice(-1)}`)).forEach(id => {
       if (vocab[id].type === "image"){
           for (let i = 1; i <= 4; i++){
               const imagePath = `../Images/${id}/option${i}.png`;
@@ -71,6 +68,9 @@ function lessonDetails(length, topicnum, lessonnum){
 let time;
 let startTime;
 let finalTime;
+let timeSeconds;
+let timeMinutes;
+let sTrue = "";
 
 function timer(command){
     if (command === "start"){
@@ -79,7 +79,20 @@ function timer(command){
     else if (command === "stop"){
         finalTime = Date.now();
         time = finalTime - startTime;
-        return time;
+        timeSeconds = Math.floor(time/1000);
+        timeMinutes = Math.floor(timeSeconds/60);
+        if (timeMinutes = 1){
+            sTrue = "s";
+        }
+        else if (timeSeconds = 1){
+            sTrue = "s";
+        }
+        if (timeSeconds < 60){
+            return `${timeSeconds} second${sTrue}`
+        }
+        else{
+            return `${timeMinutes} minute${sTrue} ${timeSeconds % 60} second${sTrue}`
+        }
     }
 }
 
@@ -108,12 +121,18 @@ function switchSection(currentSection, nextSection) {
             lessonHud.style.display = "none";
             checkBtn.style.display = "none";
             lessonEnd.style.display = "flex";
+            sectionState = "finished";
         }
         checkBtn.classList.remove("answered");
+        selectorMessage.textContent = "";
 };
 
 // Setting question data + audio
+const selectorMessage = document.getElementById("selectorMessage");
+
 let answerLanguage;
+let answerOption;
+let sAnswer;
 
 function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage){
     const wordelement = document.getElementById(wordElement);
@@ -137,6 +156,7 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
         let sQuestionLanguage;
         questionTextID = vocab[vocabid].question[0];
         sQuestionLanguage = vocab[vocabid].question[1];
+        answerOption = vocab[vocabid].answer;
         if(soundBtn){
             const soundbtn = displayedSection.querySelector(`.${soundBtn}`);
             const audiosrc = `../Audio/${questionTextID}.mp3`;
@@ -151,16 +171,20 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
         if (vocab[vocabid].type === "image"){
             wordelement.textContent = vocab[questionTextID][sQuestionLanguage];
 
-            option1.src = `../Images/${vocabid}/option1.png`;
-            option2.src = `../Images/${vocabid}/option2.png`;
-            option3.src = `../Images/${vocabid}/option3.png`;
-            option4.src = `../Images/${vocabid}/option4.png`;
+            option1.src = imageCache[`../Images/${vocabid}/option1.png`].src;
+            option2.src = imageCache[`../Images/${vocabid}/option2.png`].src;
+            option3.src = imageCache[`../Images/${vocabid}/option3.png`].src;
+            option4.src = imageCache[`../Images/${vocabid}/option4.png`].src;
+
+            selectorMessage.textContent = `${vocab[questionTextID].tamlish} means ${vocab[questionTextID].english}!`;
         }
         else if (vocab[vocabid].type === "heardWord"){
             option1.textContent = vocab[vocab[vocabid].questiondata[0]][sQuestionLanguage];
             option2.textContent = vocab[vocab[vocabid].questiondata[1]][sQuestionLanguage];
             option3.textContent = vocab[vocab[vocabid].questiondata[2]][sQuestionLanguage];
             option4.textContent = vocab[vocab[vocabid].questiondata[3]][sQuestionLanguage];
+            
+            sAnswer = vocab[questionTextID][sQuestionLanguage];
         }
     }
     else{
@@ -191,11 +215,8 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
 
 // Singular correct element selection logic
 let selectedElement;
-let answerOption;
 let elements;
-
-function oneElementSelector(elementsClass, answeroption) {
-    answerOption = answeroption; // * temp varabile till selction storgare sorted out
+function oneElementSelector(elementsClass) {
     elements = document.querySelectorAll(`.${elementsClass}`);
     elements.forEach(element => {
         element.addEventListener("click", () => {
@@ -203,7 +224,7 @@ function oneElementSelector(elementsClass, answeroption) {
                 elmnt.classList.remove("clicked");
             });
             element.classList.add("clicked");
-            selectedElement = element.id;
+            selectedElement = [...element.classList].find(c => c.startsWith("option"));;
             console.log(selectedElement);
             answered = true;
             checkBtn.classList.add("answered");
@@ -271,6 +292,7 @@ let clicked = 0;
 let sectionState = "answering";
 let vocabData;
 let selectedFeedback;
+let listQuestionResults = [];
 const checkBtn = document.querySelector(".checkBtn");
 const typedWordPointer = document.querySelector(".typedWord");
 const resultBox = document.querySelector(".resultBox");
@@ -278,6 +300,7 @@ const messageOverview = document.getElementById("messageBox");
 const answerMessage = document.getElementById("answerMessage");
 const userFeedbackBox = document.getElementById("userFeedbackBox");
 const feedbackBtns = document.querySelectorAll(".feedbackBtn");
+const imageSection = document.querySelector(".choose_picture");
 
 function markSection(answerID, questionType, switchedToSectionpointer) {
     currentAnswerID = answerID;
@@ -298,7 +321,12 @@ function setMessages(messageoverview, answermessage){
 
 feedbackBtns.forEach(button => {
     button.addEventListener("click", (event) =>{
-        const btnID = event.target.id;
+        feedbackBtns.forEach(btn =>{
+            btn.classList.remove("feedbackClicked");
+            btn.disabled = true;
+        })
+        event.currentTarget.classList.add("feedbackClicked");
+        const btnID = event.currentTarget.id;
         if (btnID === "goodProficiencyBtn"){
             selectedFeedback = "Good";
         }
@@ -308,6 +336,7 @@ feedbackBtns.forEach(button => {
         else if (btnID === "badProficiencyBtn"){
             selectedFeedback = "Bad";
         }
+        addWordtoTopic("incorrect", currentAnswerID);
     })
 })
 
@@ -322,13 +351,13 @@ async function addWordtoTopic(answerstatus, vocabID){
     else if (answerstatus === "incorrect"){
         vocabData = selectedFeedback ?? "Bad";
     }
-    else{
-        vocabData = "Bad";
-    }
-    const userID = currentUser.uid;
+
     if (currentUser){
+        const userID = currentUser.uid;
         try{
             const wordsDocRef = doc(db, "users", userID, "topics", topic, "vocab", "words");
+            const wordsDoc = await getDoc(doc(wordsDocRef));
+            const newWord = !wordsDoc.data()?.[vocabID];
             await setDoc(wordsDocRef, {
                 [vocabID]: vocabData
             }, { merge: true });
@@ -337,6 +366,17 @@ async function addWordtoTopic(answerstatus, vocabID){
             await setDoc(topicDocRef, {
                 "status": "active"
             }, { merge: true });
+
+            // will only update server timestamp if new word is added, proficiency updates have no need to fetch from firestore
+            if (newWord){
+                await setDoc(doc(db, "users", currentUser.uid),{
+                    vocabLastUpdatedTimestamp: serverTimestamp()
+                }, { merge: true });
+            }
+
+            const cachedProficiency = JSON.parse(localStorage.getItem("cachedProficiency")) || {} // || {} to make sure no errors occur - empty object
+            cachedProficiency[vocabID] = vocabData;
+            localStorage.setItem("cachedProficiency", JSON.stringify(cachedProficiency));
         }
         catch (error){
             console.log("error with database", error)
@@ -365,21 +405,30 @@ function mark(){
         currentAnswer = answerOption;
     }
     typedValue = typedWordPointer.value.trim();
-    typedWordPointer.blur(); // deselects input box
     if (answered){
+        typedWordPointer.blur(); // deselects input box
         switchedTo = switchedToSection;
         if (currentQuestionType === "selection"){
-            // TODO add selector ids and apply marking logic for that
             if (currentAnswer === selectedElement) {
                 console.log("correct");
                 setColours("rgb(5, 149, 15)", "rgb(0, 170, 11)");
                 setMessages("Well Done!","");
+                addWordtoTopic("correct", currentAnswerID);
+                listQuestionResults.push("Correct");
                 userFeedbackBox.style.display = "none";
             }
             else{
                 console.log("incorrect");
                 setColours("rgb(230, 0, 35)", "rgb(255, 66, 66)");
-                setMessages("Incorrect",`The correct answer was "${currentAnswer}"`);
+                if (displayedSection === imageSection){
+                    let outputtedAnswer = currentAnswer.charAt(0).toUpperCase()+currentAnswer.slice(1)
+                    setMessages("Incorrect",`The correct answer was ${outputtedAnswer.slice(0,-1)+" " + outputtedAnswer.slice(-1)}`);
+                }
+                else{
+                    setMessages("Incorrect", `The correct answer was "${sAnswer}"`)
+                }
+                addWordtoTopic("incorrect", currentAnswerID);
+                listQuestionResults.push("Incorrect");
                 userFeedbackBox.style.display = "block";
             }
         }
@@ -395,6 +444,7 @@ function mark(){
                 setMessages("Incorrect",`The correct answer was "${currentAnswer.join(" ")}"`);
                 userFeedbackBox.style.display = "block";
                 addWordtoTopic("incorrect", currentAnswerID);
+                listQuestionResults.push("Incorrect");
             }
             if (correctLength){
                 let arrayDistances = [];
@@ -412,6 +462,7 @@ function mark(){
                     setMessages("Well Done!","");
                     userFeedbackBox.style.display = "none";
                     addWordtoTopic("mostlyCorrect", currentAnswerID);
+                    listQuestionResults.push("Correct");
                 }
                 else if (editDistance === 0){
                     console.log("correct");
@@ -419,6 +470,7 @@ function mark(){
                     setMessages("Perfect","");
                     userFeedbackBox.style.display = "none";
                     addWordtoTopic("correct", currentAnswerID);
+                    listQuestionResults.push("Correct");
                 }
                 else{
                     console.log("incorrect");
@@ -426,6 +478,7 @@ function mark(){
                     setMessages("Incorrect",`The correct answer was "${currentAnswer.join(" ")}"`);
                     userFeedbackBox.style.display = "block";
                     addWordtoTopic("incorrect", currentAnswerID);
+                    listQuestionResults.push("Incorrect");
                 }
             }
         }
@@ -447,6 +500,11 @@ checkBtn.addEventListener("click", () => {
 
 window.addEventListener("keydown", (event) => {
     if (cancelLessonBox.classList.contains("animated")) return;
+    if (event.key === "Enter" && sectionState === "finished"){
+        endLessonBtn.click();
+        return;
+    }
+    if (sectionState === "finished") return;
     if (event.key === "Enter" && sectionState === "answering"){
         mark();
     }
@@ -476,6 +534,8 @@ function increaseProgress(lessonLength) {
 // End of the lesson
 
 const endLessonBtn = document.getElementById("endLessonBtn");
+const exampleLessonSection = document.getElementById("exampleLessonSection");
+const exitExampleBtn = document.getElementById("exitExampleBtn");
 
 endLessonBtn.addEventListener("click", async () =>{
     if (currentUser){
@@ -489,16 +549,47 @@ endLessonBtn.addEventListener("click", async () =>{
         catch (error){
             console.log("error",error);
         }
+        window.location.href = "lessons.html";
     }
-    window.location.href = "lessons.html";
+    else{
+        lessonEnd.style.display = "none";
+        exampleLessonSection.style.display = "flex";
+        exitExampleBtn.onclick = () => {window.location.href = "lessons.html"};
+    }
 });
+
+
+const table = document.getElementById("questionMarks");
+const averageBox = document.getElementById("average");
+let markNum = 0;
+let average;
+
+function questionResults(){
+    listQuestionResults.forEach((result, index) => {
+        const tableRow = table.insertRow();
+        tableRow.insertCell().textContent = `Q${index+1}`;
+        tableRow.insertCell().textContent = result;
+        const resultCell = tableRow.cells[1];
+        if (result === "Correct"){
+            markNum += 1
+        }       
+        if (result === "Correct"){
+            resultCell.style.color = "green";
+        } 
+        else {
+            resultCell.style.color = "red";
+        }
+    });
+    average = markNum/lessonLengthValue;
+    averageBox.textContent = `Average: ${Math.floor(average*100)}%`
+}
 
 function switchedSectionTo(){
     return switchedTo;
 }
 
 // Exporting Functions
-export { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, questionData, fetchLessonData };
+export { switchSection, oneElementSelector, markSection, switchedSectionTo, lessonDetails, timer, questionData, fetchLessonData, questionResults };
 
 
 
