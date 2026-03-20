@@ -7,7 +7,7 @@ const writeWord = document.querySelector(".writeWord")
 const lessonEnd  = document.querySelector(".lesson_end");
 const lessonTime = document.getElementById("lessonTime");
 
-lessonDetails(4,"topic1", "lesson1");
+lessonDetails(4,"t1", "l1");
 
 async function startLesson(){
     await fetchLessonData();

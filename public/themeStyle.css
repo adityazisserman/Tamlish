@@ -463,24 +463,62 @@ header{
 /* Footer */
 
 #footer{
-    background-color:rgb(56, 129, 255);
+    background-color:rgb(56, 106, 255);
     color: white;
-    height: 100px;
+    height: fit-content;
     font-family: Verdana;
     font-size: 14px;
-    padding-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
-#icon1{
-    height: 60px;
-    width: 60px;
-    float: right;
-    transform: translateY(-30px);
-    padding-right: 20px;
-    margin: 0px;
+#footerProductSummary{
+    font-size: 12px;
+    flex: 1;
 }
-#firebaseLogo{
-    height: 50px;
-    width: 200px;
-    float: right;
-    transform: translate(-50px,-30px);
+#footerLinksBox{
+    align-self: center;
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
 }
+#footerLogosBox{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.logos{
+    height: 35px;
+    width: 35px;
+    transform: scale(0.7);
+}
+.logoStyle{
+    display: inline-flex;
+    border-radius: 100%;
+    background-color: rgb(0, 85, 255);
+    overflow: hidden;
+}
+.logoStyle:hover{
+    opacity: 0.96;
+}
+#tamlishLogo{
+    transform: scale(0.6) scaleX(1.2);
+}
+.footerLinks{
+    text-decoration: none;
+}
+.footerLinks:hover{
+    text-decoration: underline;
+    color: blue;
+}
+.footerLinks:visited{
+    color: white;
+}
+#footerProductSummary{
+    opacity: 0.8;
+}
+

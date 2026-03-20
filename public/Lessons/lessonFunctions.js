@@ -543,7 +543,7 @@ endLessonBtn.addEventListener("click", async () =>{
             const userID = currentUser.uid;
             const lessonStatusDocRef = doc(db, "users", userID, "lessonStatuses", "lessonStatus")
             await setDoc(lessonStatusDocRef, {
-                [lesson]: "completed"
+                [topic+lesson]: "completed"
             }, { merge: true });
         }   
         catch (error){

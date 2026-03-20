@@ -12,34 +12,43 @@
 main{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 a{
     text-decoration: none;
 }
 .lessonBanner{
-    color: black;
-    background-color: lightblue;
+    color: white;
+    background-color: rgb(34, 138, 243);
     cursor: pointer;
     width: 98vw;
-    height: 70px;
-    margin-top: 5px;
-    border-radius: 10px;
-    padding: 5px;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 12px;
+}
+.lessonBanner hr{
+    color: white;
 }
 #exampleLessonBanner{
     display: none;
 }
 .lessonBanner:hover{
-    box-shadow: 2px 5px black;
+    box-shadow: 2px 5px rgb(4, 90, 219);
+}
+.lessonBanner:active{
+    top: 3px;
+    box-shadow: 2px 2px rgb(4, 90, 219);
 }
 .greyedOut{
     pointer-events: none;
 }
 .greyedOut .lessonBanner{
     background-color: gray;
+}
+.completed div{
+    background-color: rgb(13, 90, 197);
 }
 
