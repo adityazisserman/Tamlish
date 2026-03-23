@@ -22,8 +22,6 @@ let activeTab;
 let isSearchActive;
 let messageBox;
 
-// TODO add laoding scrren + no searhc results + no vocab leartn when not singed in, as well as potentially caching vocab so loading time improves.
-
 const tableCache = {
     vocab: "cachedVocab",
     vocabVersion: "cachedVocabVersion",
@@ -83,6 +81,19 @@ onAuthStateChanged(auth, async (user) => {
         updateMessage(wordsArray, phrasesArray, false);
     }
     else{
+        wordsArray = [];
+        phrasesArray = [];
+        currentWordsResults = [];
+        currentPhrasesResults = [];
+        vocabProficiencyData = [];
+        isSearchActive = false;
+
+        wordsTableBody.innerHTML = "";
+        phrasesTableBody.innerHTML = "";
+
+        backBtn.style.display = "none";
+        searchQuery.value = "";
+
         const settingsLi = document.getElementById("settingsLi");
         settingsLi.style.display = "none";
         wordsTableMessageBox.textContent = "Sign in to view your vocab";
@@ -91,8 +102,10 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 wordsSwitchBtn.addEventListener("click", () => {
-    wordsTable.style.display = "block";
+    wordsTable.style.display = "table";
     phrasesTable.style.display = "none";
+    phrasesSwitchBtn.classList.remove("current");
+    wordsSwitchBtn.classList.add("current");
     wordsTableMessageBox.style.display = "block";
     phrasesTableMessageBox.style.display = "none";
     activeTab = "words";
@@ -112,7 +125,9 @@ wordsSwitchBtn.addEventListener("click", () => {
 
 phrasesSwitchBtn.addEventListener("click", () => {
     wordsTable.style.display = "none";
-    phrasesTable.style.display = "block";
+    phrasesTable.style.display = "table";
+    wordsSwitchBtn.classList.remove("current");
+    phrasesSwitchBtn.classList.add("current");
     wordsTableMessageBox.style.display = "none";
     phrasesTableMessageBox.style.display = "block";
     activeTab = "phrases"
@@ -190,6 +205,12 @@ function populateTable(array, table) {
 
         const proficencyCell = document.createElement("td");
         proficencyCell.textContent = vocabProficiencyData[item.id] ?? "N/A";
+        if (vocabProficiencyData[item.id] === "Bad"){
+            proficencyCell.style.color = "red";
+        }
+        else{
+            proficencyCell.style.color = "green";
+        }
         row.appendChild(proficencyCell);
         
         table.appendChild(row);

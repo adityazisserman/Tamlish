@@ -9,13 +9,76 @@
     color: white;
     box-shadow: 2px 5px rgb(88, 133, 230);
 }
+.tableSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
 .table{
     color: black;
-    width: fit-content;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 80vw;
     text-align: center;
+    border: 2px solid rgb(0, 94, 255);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.table th{
+    color: rgb(0, 110, 255);
+    border-right: 2px solid rgb(0, 94, 255);
+    border-bottom: none;
+    padding: 18px;
 }
 .table td{
-    padding: 4px;
+    border-top: none;
+    border-top: 2px solid rgb(0, 94, 255);
+    border-right: 2px solid rgb(0, 94, 255);
+    padding: 18px;
+}
+.table th:last-child,
+.table td:last-child{
+    border-right: none;
+}
+.table tr:last-child td{
+    border-bottom: none;
+}
+
+.searchSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px ;
+}
+.searchSection input{
+    width: 50vw;
+}
+#switchBtns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+button{
+    padding: 8px;
+    background-color: rgb(0, 136, 255);
+    border: none;
+    color: white;
+    border-radius: 8px;
+}
+input{
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 8px;
+    outline: none;
+}
+input:focus{
+    border: 2px solid rgb(0, 136, 255);
 }
 main{
     color: black;
@@ -28,4 +91,7 @@ main{
 }
 .soundBtns{
     cursor: pointer;
+}
+.current{
+    background-color: color-mix(in srgb, rgb(0, 136, 255) 65%, black);
 }
