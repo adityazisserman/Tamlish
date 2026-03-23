@@ -69,3 +69,5 @@ node_modules/
 .dataconnect
 
 /public/firebase-config.js
+
+.github/copilot-instructions.md
