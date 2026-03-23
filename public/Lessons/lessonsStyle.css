@@ -51,4 +51,6 @@ a{
 .completed div{
     background-color: rgb(13, 90, 197);
 }
-
+.completed:hover div{
+    box-shadow: 2px 4px rgb(0, 106, 255);
+}

@@ -1,4 +1,4 @@
-import { auth, doc, setDoc, db, onAuthStateChanged } from "../firebase-config.js";
+import { auth, doc, setDoc, db, onAuthStateChanged, getDoc, serverTimestamp } from "../firebase-config.js";
 
 let answered = false;
 let switchedTo;
@@ -356,7 +356,7 @@ async function addWordtoTopic(answerstatus, vocabID){
         const userID = currentUser.uid;
         try{
             const wordsDocRef = doc(db, "users", userID, "topics", topic, "vocab", "words");
-            const wordsDoc = await getDoc(doc(wordsDocRef));
+            const wordsDoc = await getDoc(wordsDocRef);
             const newWord = !wordsDoc.data()?.[vocabID];
             await setDoc(wordsDocRef, {
                 [vocabID]: vocabData

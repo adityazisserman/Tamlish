@@ -1,7 +1,7 @@
 
 // login/signup
 
-import { auth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, db, collection, doc, getDoc, setDoc, addDoc } from "./firebase-config.js";
+import { auth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, db, collection, doc, getDoc, setDoc, addDoc, getDocs } from "./firebase-config.js";
 
 const loginpg = document.getElementById("loginpg");
 const LIexitBtn = document.getElementById("LIexitBtn");
@@ -11,24 +11,45 @@ const signupBtn = document.getElementById("signupBtn");
 const signuppg = document.getElementById("signuppg");
 const signUp = document.getElementById("signUp");
 const login = document.getElementById("login");
-const wrapper = document.getElementById("wrapper")
-const signoutBtn = document.getElementById("signoutBtn")
+const wrapper = document.getElementById("wrapper");
+const signoutBtn = document.getElementById("signoutBtn");
 const sign_in_email = loginpg.querySelector("input[type='email']");
 const sign_in_password = loginpg.querySelector("input[type='password']");
 const sign_up_email = signuppg.querySelector("input[type='email']");
 const sign_up_password = signuppg.querySelector("input[type='password']");
 const utilitiesNavbar = document.getElementById("utilities");
-
+const stats = document.getElementById('statsGUI');
 const errorpage1 = document.getElementById("errorPage1")
 const errorpage2 = document.getElementById("errorPage2")
+
+document.addEventListener("keydown", (event) =>{
+  if (event.key === "Escape"){
+    if (document.activeElement.tagName === "INPUT"){
+      document.activeElement.blur();
+    }
+    else{
+      loginpg.style.display = "none";
+      signuppg.style.display = "none";
+    }
+  }
+})
+
+document.addEventListener("mousedown", (event) =>{
+  if (stats.style.display !== "none"  && !stats.contains(event.target)){
+    stats.style.display = "none";
+  }
+})
+
 signinBtn.addEventListener("click", () => {
     loginpg.style.display = "flex";
     errorpage1.textContent = ""
     errorpage2.textContent = ""
+    document.body.style.overflow = "hidden" // disables scrolling
 });
 
 LIexitBtn.addEventListener("click", () => {
     loginpg.style.display = "none";
+    document.body.style.overflow = "auto";
 });
 
 signupBtn.addEventListener("click", () => {
@@ -38,6 +59,7 @@ signupBtn.addEventListener("click", () => {
 
 SUexitBtn.addEventListener("click", () => {
     signuppg.style.display = "none";
+    document.body.style.overflow = "auto";
 });
 
 async function generateUserFile(user){
@@ -54,6 +76,7 @@ signUp.addEventListener("click", () => {
     const user = userCredential.user;
     await generateUserFile(user);
     console.log("User created:", user.email);
+    document.body.style.overflow = "auto";
     signuppg.style.display = "none"  
   })
   .catch((error) => {
@@ -70,6 +93,7 @@ login.addEventListener("click", () => {
     // Signed in 
     const user = userCredential.user;
     console.log("User signed in:", user.email); 
+    document.body.style.overflow = "auto";
     loginpg.style.display = "none" })
   .catch((error) => {
     const errorCode = error.code;
@@ -113,18 +137,78 @@ onAuthStateChanged(auth, (user) => {
       signinBtn.id = "displayNameBtn";
       wrapper.id = "wrapper1"
       const wrapper1 = document.getElementById("wrapper1")
-      const stats = document.getElementById('statsGUI');
       wrapper1.style.minWidth = "18ch";
 
       const statsexitBtn = document.getElementById("statsexitBtn")
 
       utilitiesNavbar.style.display = "flex";
 
-      wrapper1.addEventListener("click", () => {
+      const settingsLi = document.getElementById("settingsLi");
+      settingsLi.style.display = "block";
+
+      wrapper1.addEventListener("click", async (e) => {
+            console.log("wrapper1 clicked, stats display:", stats.style.display) // ← add this
         if (auth.currentUser){
-          stats.style.display = "block"
+          if (stats.style.display !== "flex"){
+            stats.style.display = "flex"
+
+            // loading user stats
+
+            const wordsGoodLearnt = document.getElementById("wordsGoodLearnt");
+            const wordsNeutralLearnt = document.getElementById("wordsNeutralLearnt");
+            const wordsBadLearnt = document.getElementById("wordsBadLearnt");
+            const lessonsCompleted = document.getElementById("lessonsCompleted");
+            const topicsCollectionRef = await getDocs(collection(db, "users", user.uid, "topics"));
+            const lessonStatusesDocRef = await getDoc(doc(db, "users", user.uid, "lessonStatuses",  "lessonStatus"));
+            let wordsGoodLearntNum = 0;
+            let wordsNeutralLearntNum = 0;
+            let wordsBadLearntNum = 0;
+            let lessonsCompletedNum = 0;
+
+            for (const topic of topicsCollectionRef.docs){
+              const wordsDocRef = await getDoc(doc(db, "users", user.uid, "topics", topic.id,   "vocab", "words"));
+              if (!wordsDocRef.exists()) continue;
+              const wordsData = wordsDocRef.data();
+            
+              for (const [wordID, proficency] of Object.entries(wordsData)){
+                if (wordID.includes("w") || wordID.includes("p")){
+                  if(proficency === "Good"){
+                    wordsGoodLearntNum += 1;
+                  }
+                  else if (proficency === "Neutral"){
+                    wordsNeutralLearntNum += 1;
+                  }
+                  else if (proficency === "Bad"){
+                    wordsBadLearntNum += 1;
+                  }
+                }
+              
+              }
+            };
+
+            if (lessonStatusesDocRef.exists()){
+              const lessonStatuses = lessonStatusesDocRef.data();
+              for (const [lessonId, lessonStatus] of Object.entries(lessonStatuses)){
+                if (lessonStatus === "completed"){
+                  lessonsCompletedNum += 1;
+                }
+              }
+            }
+
+            wordsGoodLearnt.textContent = wordsGoodLearntNum;
+            wordsNeutralLearnt.textContent = wordsNeutralLearntNum;
+            wordsBadLearnt.textContent = wordsBadLearntNum;
+            lessonsCompleted.textContent = lessonsCompletedNum;
+          }
+          else{
+            stats.style.display = "none";
+          }
         }
       })
+
+      wrapper1.addEventListener("mousedown", (e) => {
+          e.stopPropagation();
+      });
 
       statsexitBtn.addEventListener("click", (e) => {
         e.stopPropagation();   // stop the click from reaching wrapper1
@@ -141,6 +225,7 @@ onAuthStateChanged(auth, (user) => {
             stats.style.display = "none"
             wrapper.style.minWidth = "";
             signinBtn.style.visibility = "visible";
+            location.reload();
           })
           .catch((error) => {
             console.error(error);
@@ -176,16 +261,13 @@ googleBtns.forEach((googleBtn) =>{
       console.log("User signed in:", result.user.displayName)
       loginpg.style.display = "none"
       signuppg.style.display = "none"
-      // IdP data available using getAdditionalUserInfo(result)
+      document.body.style.overflow = "auto";
     }).catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used
-      const email = error.customData.email;
       // The AuthCredential type that was used
       const credential = GoogleAuthProvider.credentialFromError(error)
-      console.log("Error:", error.code, error.message)
+      console.log("Error:", errorCode, error.message)
       errorpage1.textContent = errorMessage
       errorpage2.textContent = errorMessage
     });
