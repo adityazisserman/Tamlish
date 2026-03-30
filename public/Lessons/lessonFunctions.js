@@ -5,7 +5,8 @@ let switchedTo;
 const root = document.documentElement;
 
 
-// * lesson section types {current: imagesection, pickheardword, writeEnglishWord, lessonEnd } (new: writeTamlishWord, pickwrittenword, picksoundheardword)
+// * lesson section types {current: imagesection, pickheardword, writeWord, lessonEnd } (new: pickwrittenword, picksoundheardword, speak and compare to acutal sound section etc)
+
 
 
 let currentUser = null;
@@ -459,7 +460,7 @@ function mark(){
                 if (editDistance === 1){
                     console.log("correct");
                     setColours("rgb(5, 149, 15)", "rgb(0, 170, 11)");
-                    setMessages("Well Done!","");
+                    setMessages("Well Done!",`The complete correct answer is "${currentAnswer.join(" ")}"`);
                     userFeedbackBox.style.display = "none";
                     addWordtoTopic("mostlyCorrect", currentAnswerID);
                     listQuestionResults.push("Correct");

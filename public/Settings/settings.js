@@ -8,6 +8,8 @@ const setEmailBtn = document.getElementById("setEmailBtn");
 const nameInput = document.getElementById("usernameChange");
 const emailInput = document.getElementById("emailChange");
 
+// TODO add forgot password option + update auth error messages
+
 onAuthStateChanged(auth, (user) => {
     if (user != null) {
         user.providerData.forEach((profile) => {
