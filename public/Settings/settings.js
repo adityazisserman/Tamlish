@@ -1,12 +1,13 @@
 import { auth, onAuthStateChanged, db, getDoc, doc, setDoc, updateEmail, signInWithEmailAndPassword, sendPasswordResetEmail } from "../firebase-config.js";
 
-const usernameSection = document.getElementById("usernameSection");
 const emailSection = document.getElementById("emailSection");
 const passwordSection = document.getElementById("passwordSection");
 const setUsernameBtn = document.getElementById("setUsernameBtn");
 const setEmailBtn = document.getElementById("setEmailBtn");
 const nameInput = document.getElementById("usernameChange");
 const emailInput = document.getElementById("emailChange");
+
+// TODO update settings UI, as well as adding theme options (also different voices)
 
 onAuthStateChanged(auth, (user) => {
     if (user != null) {
