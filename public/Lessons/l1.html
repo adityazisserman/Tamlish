@@ -21,10 +21,12 @@
     <main>
         <br>
         <div class="choose_picture lessonSection">
-            Pick the correct picture: <br>
-            <div class="questionData">
-                <span class="material-symbols-outlined soundBtn">volume_up</span>
-                <div id="question1"></div>
+            <div class="question">
+                <div class="questionCommand">Pick the correct picture:</div>
+                <div class="questionData">
+                    <span class="material-symbols-outlined soundBtn">volume_up</span>
+                    <div id="question1"></div>
+                </div>
             </div>
             <div class="options">
                 <img type="image/png" alt="" class="imgs option1" id="img1">
@@ -35,10 +37,12 @@
         </div>
 
         <div class="choose_heard_word lessonSection">
-            Pick the word that you hear <br>
-            <div class="questionData">
-                <span class="material-symbols-outlined soundBtn">volume_up</span>
-                <div id="question2"></div>
+            <div class="question">
+                <div class="questionCommand">Pick the word that you hear:</div>
+                <div class="questionData">
+                    <span class="material-symbols-outlined soundBtn">volume_up</span>
+                    <div id="question2"></div>
+                </div>
             </div>
             <div class="options">
                 <div class="heardWords option1" id="heardWord1">Word 1</div><br>
@@ -49,13 +53,15 @@
         </div>
 
         <div class="writeWord lessonSection">
-            Translate into <span class="Qlanguage"></span> <br>
-            <div class="questionData">
-                <span class="material-symbols-outlined soundBtn">volume_up </span>
-                <div id="question3"></div>
+            <div class="question">
+                <div class="questionCommand">Translate into <span class="Qlanguage"></span>:</div>
+                <div class="questionData">
+                    <span class="material-symbols-outlined soundBtn">volume_up </span>
+                    <div id="question3"></div>
+                </div>
             </div>
             <div class="wordToType"></div>
-            <input class="typedWord" type="text" autocomplete="off">
+            <textarea class="typedWord" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" maxlength="155" spellcheck="false"></textarea>
         </div>
 
         <div id="lessonOverlay"></div>
@@ -63,9 +69,12 @@
 
 
         <div class="lesson_end lessonSection">
-            End of the lesson
+            <div id="endText">End of the lesson</div>
             <div id="funFact">Fun Fact! ""</div>
-            <div id="lessonTime"></div><br>
+            <div id="timerResult">
+                <div>Time taken:&nbsp;</div>
+                <div id="lessonTime" class="results"></div>
+            </div>
             Question Marks:
             <table id="questionMarks">
                 <thead>
@@ -73,12 +82,15 @@
                 <tbody>
                 </tbody>
             </table>
-            <div id="average"></div>
+            <div id="averageResult">
+                <div>Average:&nbsp;</div>
+                <div id="average" class="results"></div>
+            </div>
             <button id="endLessonBtn">Finish</button>
         </div>
         <div id="exampleLessonSection">
-            <div id="exampleLessonText">This was an example lesson, if you would like to continue learning, please sign in or sign up, in order for progress to be saved</div> <br> <button
-                id="exitExampleBtn">Exit</button>
+            <div id="exampleLessonText">This was an example lesson, if you would like to continue learning, please sign in or sign up, in order for progress to be saved</div>
+            <button id="exitExampleBtn">Exit</button>
         </div>
     </main>
     <div class="resultBox">

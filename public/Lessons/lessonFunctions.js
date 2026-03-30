@@ -71,7 +71,8 @@ let startTime;
 let finalTime;
 let timeSeconds;
 let timeMinutes;
-let sTrue = "";
+let sSecsTrue = "s"; 
+let sMinsTrue = "s";
 
 function timer(command){
     if (command === "start"){
@@ -83,16 +84,16 @@ function timer(command){
         timeSeconds = Math.floor(time/1000);
         timeMinutes = Math.floor(timeSeconds/60);
         if (timeMinutes = 1){
-            sTrue = "s";
+            sMinsTrue = "";
         }
         else if (timeSeconds = 1){
-            sTrue = "s";
+            sSecsTrue = "";
         }
         if (timeSeconds < 60){
-            return `${timeSeconds} second${sTrue}`
+            return `${timeSeconds} second${sSecsTrue}`
         }
         else{
-            return `${timeMinutes} minute${sTrue} ${timeSeconds % 60} second${sTrue}`
+            return `${timeMinutes} minute${sMinsTrue} ${timeSeconds % 60} second${sSecsTrue}`
         }
     }
 }
@@ -106,8 +107,9 @@ const lessonOverlay = document.getElementById("lessonOverlay");
 let displayedSection;
 
 function switchSection(currentSection, nextSection) {
-        currentSection.style.display = "none"
-        nextSection.style.display = "block"
+        currentSection.style.display = "none";
+        currentSection.querySelectorAll(".clicked").forEach(el => el.classList.remove("clicked"));
+        nextSection.style.display = "flex";
         displayedSection = nextSection;
         answered = false;
         resultBox.classList.remove("animated");
@@ -137,6 +139,7 @@ let sAnswer;
 
 function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage){
     const wordelement = document.getElementById(wordElement);
+    const cachedProficiency = JSON.parse(localStorage.getItem("cachedProficiency")) || {};
 
     if (questionLanguage){
         if (questionLanguage === "english"){
@@ -186,6 +189,15 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
             option4.textContent = vocab[vocab[vocabid].questiondata[3]][sQuestionLanguage];
             
             sAnswer = vocab[questionTextID][sQuestionLanguage];
+
+            const isNew = !cachedProficiency[questionTextID];
+
+            if (isNew){
+                selectorMessage.textContent = `${vocab[questionTextID].tamlish} means ${vocab[questionTextID].english}!`;
+            }
+            else{
+                selectorMessage.textContent = "";
+            }
         }
     }
     else{
@@ -280,6 +292,7 @@ exitBtn.addEventListener("click", () => {
 })
 
 // TODO fix enter and escape logic - bit buggy
+
 // Section Marker
 let currentAnswerID;
 let currentAnswer;
@@ -294,6 +307,7 @@ let sectionState = "answering";
 let vocabData;
 let selectedFeedback;
 let listQuestionResults = [];
+let maxLines = 5;
 const checkBtn = document.querySelector(".checkBtn");
 const typedWordPointer = document.querySelector(".typedWord");
 const resultBox = document.querySelector(".resultBox");
@@ -396,6 +410,18 @@ typedWordPointer.addEventListener("input", () =>{
         checkBtn.classList.remove("answered");
     }
 })
+
+typedWordPointer.addEventListener('keydown', (e) => {
+    const lines = typedWordPointer.value.split('\n').length;
+    if (e.key === 'Enter' && lines >= maxLines) {
+        e.preventDefault(); // prevents new lines
+    }
+});
+typedWordPointer.addEventListener('input', () => {
+  if (typedWordPointer.scrollHeight > typedWordPointer.clientHeight) {
+    typedWordPointer.value = typedWordPointer.value.slice(0, -1); // prevents further typing after cap
+  } 
+});
 
 function mark(){
     if (sectionState !== "answering") return; //exits if mark has already been called once
@@ -582,7 +608,7 @@ function questionResults(){
         }
     });
     average = markNum/lessonLengthValue;
-    averageBox.textContent = `Average: ${Math.floor(average*100)}%`
+    averageBox.textContent = `${Math.floor(average*100)}%`
 }
 
 function switchedSectionTo(){
