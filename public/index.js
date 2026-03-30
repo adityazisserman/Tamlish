@@ -8,8 +8,6 @@ const LIexitBtn = document.getElementById("LIexitBtn");
 const SUexitBtn = document.getElementById("SUexitBtn");
 const signinBtn = document.getElementById("loginBtn");
 const signupBtn = document.getElementById("signupBtn");
-const getStartedBtn = document.getElementById("getStartedBtn");
-const signinpgbtn = document.getElementById("signinBtn");
 const signuppg = document.getElementById("signuppg");
 const signUp = document.getElementById("signUp");
 const login = document.getElementById("login");
@@ -24,8 +22,6 @@ const stats = document.getElementById('statsGUI');
 const errorpage1 = document.getElementById("errorPage1")
 const errorpage2 = document.getElementById("errorPage2")
 
-// TODO add forgot password option, to allow user to reset, as well as better error messages for authentication
-
 document.addEventListener("keydown", (event) =>{
   if (event.key === "Escape"){
     if (document.activeElement.tagName === "INPUT"){
@@ -39,7 +35,7 @@ document.addEventListener("keydown", (event) =>{
 })
 
 document.addEventListener("mousedown", (event) =>{
-  if (stats.style.display !== "none"  && !stats.contains(event.target) && !wrapper.contains(event.target)){
+  if (stats.style.display !== "none"  && !stats.contains(event.target)){
     stats.style.display = "none";
   }
 })
@@ -51,26 +47,14 @@ signinBtn.addEventListener("click", () => {
     document.body.style.overflow = "hidden" // disables scrolling
 });
 
-signupBtn.addEventListener("click", () => {
-    loginpg.style.display = "none";
-    signuppg.style.display = "flex";
-});
-
-if (document.title === "Tamlish"){
-  getStartedBtn.addEventListener("click", () => {
-    signuppg.style.display = "flex";
-    document.body.style.overflow = "hidden"
-});
-}
-
-signinpgbtn.addEventListener("click", () => {
-  signuppg.style.display = "none";
-  loginpg.style.display = "flex";
-})  
-
 LIexitBtn.addEventListener("click", () => {
     loginpg.style.display = "none";
     document.body.style.overflow = "auto";
+});
+
+signupBtn.addEventListener("click", () => {
+    loginpg.style.display = "none";
+    signuppg.style.display = "flex";
 });
 
 SUexitBtn.addEventListener("click", () => {
@@ -163,7 +147,7 @@ onAuthStateChanged(auth, (user) => {
       settingsLi.style.display = "block";
 
       wrapper1.addEventListener("click", async (e) => {
-        console.log("wrapper1 clicked, stats display:", stats.style.display) // ← add this
+            console.log("wrapper1 clicked, stats display:", stats.style.display) // ← add this
         if (auth.currentUser){
           if (stats.style.display !== "flex"){
             stats.style.display = "flex"
@@ -224,10 +208,6 @@ onAuthStateChanged(auth, (user) => {
 
       wrapper1.addEventListener("mousedown", (e) => {
           e.stopPropagation();
-      });
-      
-      stats.addEventListener("click", (e) => {
-        e.stopPropagation();
       });
 
       statsexitBtn.addEventListener("click", (e) => {

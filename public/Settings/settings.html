@@ -34,11 +34,12 @@
             <input type="password" id="sign-up-password" minlength="6" required>
             <button id="signUp">Sign Up</button>
             <button class="googleLoginBtn"><img src="../Images/icons8-google-logo-64.png" class="googleLogo"> Sign up with Google</button>
+            <span id="haveAccountMessage">Already have an account? <button id="signinBtn">Sign In</button></span>
             <h3 id="errorPage2"></h3>
         </div>
     </div>
 
-    <header>
+    <header id="header">
         <nav class="navbar">
             <ul id="logo">
                 <li>
@@ -55,10 +56,10 @@
                     <div id="statsGUI">
                         <h4 id="userStatsText">User Statistics <span class="material-symbols-outlined" id="statsexitBtn">close</span></h4>
                         <div id="userStats">
-                            <div>Words Learnt: <br>
-                                Good Proficiency: <span id="wordsGoodLearnt"></span><br>
-                                Neutral Proficiency: <span id="wordsNeutralLearnt"></span><br>
-                                Bad Proficiency: <span id="wordsBadLearnt"></span></div><br>
+                            <div>Words Learnt & Proficiency: <br>
+                                Good: <span id="wordsGoodLearnt"></span><br>
+                                Neutral: <span id="wordsNeutralLearnt"></span><br>
+                                Bad: <span id="wordsBadLearnt"></span></div><br>
                             <div>Lessons Completed: <span id="lessonsCompleted"></span></div>
                         </div>
                         <button id="signoutBtn">Sign Out</button>
@@ -94,10 +95,6 @@
         <div id="passwordSection">
             <div>Reset Password:</div><button id="resetPasswordBtn">Reset</button>
         </div> <br>
-        <div id="themeSection">
-            <label for="themeSwitch">Switch Theme</label>
-            <input id="themeSwitch">
-        </div>
     </main>
 
     <footer id="footer">
