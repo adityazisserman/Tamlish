@@ -33,11 +33,12 @@
             <input type="password" id="sign-up-password" minlength="6" required>
             <button id="signUp">Sign Up</button>
             <button class="googleLoginBtn"><img src="./Images/icons8-google-logo-64.png" class="googleLogo"> Sign up with Google</button>
+            <span id="haveAccountMessage">Already have an account? <button id="signinBtn">Sign In</button></span>
             <h3 id="errorPage2"></h3>
         </div>
     </div>
 
-    <header>
+    <header id="header">
         <nav class="navbar">
             <ul id="logo">
                 <li>
@@ -54,10 +55,10 @@
                     <div id="statsGUI">
                         <h4 id="userStatsText">User Statistics <span class="material-symbols-outlined" id="statsexitBtn">close</span></h4>
                         <div id="userStats">
-                            <div>Words Learnt: <br>
-                                Good Proficiency: <span id="wordsGoodLearnt"></span><br>
-                                Neutral Proficiency: <span id="wordsNeutralLearnt"></span><br>
-                                Bad Proficiency: <span id="wordsBadLearnt"></span></div><br>
+                            <div>Words Learnt & Proficiency: <br>
+                                Good: <span id="wordsGoodLearnt"></span><br>
+                                Neutral: <span id="wordsNeutralLearnt"></span><br>
+                                Bad: <span id="wordsBadLearnt"></span></div><br>
                             <div>Lessons Completed: <span id="lessonsCompleted"></span></div>
                         </div>
                         <button id="signoutBtn">Sign Out</button>
@@ -69,60 +70,105 @@
 
     <main>
         <div id="banner" class="animated-bg">
-            <a id="tamil">TAMIL</a>
-            <a id="tamlish">TAMLISH</a>
-            <a id="english">ENGLISH</a>
-            <br>
-            <a id="slogan">Learning Tamil using English</a>
+            <canvas id="canvas"></canvas>
+            <a id="tamlishQuote">Best way to learn how to speak Tamil</a>
+            <a id="slogan">Learning Tamil using English, for tourists</a>
+            <button id="getStartedBtn">Get Started</button>
+        </div>
+        <div id="bannerBar">
+            <p><span class="socialNums">1000+</span> Words and Phrases</p>
+            <p><span class="socialNums">100+</span> Lessons</p>
+            <p><span class="socialNums">10+</span> Topics</p>
         </div>
 
-
-        <div id="overview">
-            <p>The purpose of this website is to teach Colloquial (Spoken) Tamil to tourists, using the teaching method known as transliteration (teaching foreign language using another language's
-                writing system/script - in this case English) </p>
-            <p>Tamil is a language that dates back over 2 millenia and has 2 distinct dialects - Colloquial and Literary Tamil. As tourists wish for the most part to be able to communicate with
-                and understand the locals, only Colloquial Tamil needs to be taught, to a basic level.</p>
         </div>
-        <div id="subheading">Example conversation between a tourist and a local</div>
 
         <div id="conversation">
-            <a title="Mmaguigan, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Bubble.png" target="_blank"
-                id="touristBubble"><img alt="Bubble" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Bubble.png/256px-Bubble.png?20230717185132">
-            </a>
-            <div id="touristText"></div>
-            <div id="localText"></div>
-
-            <a title="Mmaguigan, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Bubble.png" target="_blank"
-                id="localBubble"><img alt="Bubble" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Bubble.png/256px-Bubble.png?20230717185132">
-            </a>
+            <div id="touristBubble">
+                <div id="touristText"></div>
+                <img alt="Bubble" src="./Images/speech_bubbleold.png">
+            </div>
+            <div id="touristSpeaker">[TOURIST]</div>
+            <div id="beforeAfterBox">
+                <div id="slider"></div>
+                <button id="beforebtn">Before Tamlish</button>
+                <button id="afterbtn">After Tamlish</button>
+            </div>
+            <div id="localBubble">
+                <div id="localText"></div>
+                <img alt="Bubble" src="./Images/speech_bubble_flipped1.png">
+            </div>
+            <div id="localSpeaker">[LOCAL]</div>
         </div>
+
+        <div class="rotatingPhrasesCarousel">
+            <div class="carouselRotater">
+                <div class="phrases">Vanakkam <div>(Hello)</div>
+                </div>
+                <div class="phrases">Nandri <div>(Thank You)</div>
+                </div>
+                <div class="phrases">Idhu enna vilai? <div>(How much is this?)</div>
+                </div>
+                <div class="phrases">Saapaadu eppadi irukku? <div>(How is the food?)</div>
+                </div>
+                <div class="phrases">Udhavi seyya mudiyuma? <div>(Can you help me?)</div>
+                </div>
+                <div class="phrases">Vanakkam <div>(Hello)</div>
+                </div>
+                <div class="phrases">Nandri <div>(Thank You)</div>
+                </div>
+                <div class="phrases">Idhu enna vilai? <div>(How much is this?)</div>
+                </div>
+                <div class="phrases">Saapaadu eppadi irukku? <div>(How is the food?)</div>
+                </div>
+                <div class="phrases">Udhavi seyya mudiyuma? <div>(Can you help me?)</div>
+                </div>
+                <div class="phrases">Vanakkam <div>(Hello)</div>
+                </div>
+                <div class="phrases">Nandri <div>(Thank You)</div>
+                </div>
+                <div class="phrases">Idhu enna vilai? <div>(How much is this?)</div>
+                </div>
+                <div class="phrases">Saapaadu eppadi irukku? <div>(How is the food?)</div>
+                </div>
+                <div class="phrases">Udhavi seyya mudiyuma? <div>(Can you help me?)</div>
+                </div>
+            </div>
+        </div>
+        </div>
+
 
         <div id="features">
-            <div id="lsns">
-                <a class="title">Lessons</a><br><br>
-                <a>Covering a variety of suitable topics relevant for tourists, and utiliises teaching methods backed both by research and proven in the field in existing applications</a>
+            <div id="lsns" class="featuresSectionLeft">
+                <div>
+                    <h4>Lessons</h4>
+                    <p>Covering a variety of suitable topics relevant for tourists, and utiliises teaching methods backed both by research and proven in the field in existing applications (marking
+                        algo)</p>
+                </div>
+                <img id="lessonsImgExample" src="./Images/Screenshot 2026-03-26 205910.png">
             </div>
-            <div id="activs">
-                <a class="title">Interactive activities</a><br><br>
-                <a>Including listening, reading and writing exercises, as well as many other acitvties such as mutliple choice and pictoral based questions</a>
+            <div id="activs" class="featuresSectionRight">
+                <img id="activitiesImgExample" src="./Images/Screenshot 2026-03-30 104615.png">
+                <div>
+                    <h4 class="title">Interactive activities</h4>
+                    <p>Including listening, reading and writing exercises, as well as many other acitvties such as mutliple choice and pictoral based questions</p>
+                </div>
             </div>
-            <div id="accessibility">
-                <a class="title">Accessibility</a><br><br>
-                <a>Contrasting colours, as well as easy navigation and simple understandable features</a>
+            <div id="dictionary" class="featuresSectionLeft">
+                <div>
+                    <h4>Dictionary</h4>
+                    <p>Dictionary, containing all the vocabulary you learn, as well as your proficiency </p>
+                </div>
+                <img id="dictionaryImgExample" src="./Images/Screenshot 2026-03-30 104754.png">
             </div>
-            <div id="exposure">
-                <a class="title">Exposure</a><br><br>
-                <a>All Colloquial Tamil spoken by a local, and content is based off knowledge surrounding what tourists would experience in a foreign country. </a>
+            <div id="exposure" class="featuresSectionRight">
+                <img id="exposureImgExample" src="./Images/Logomark_Monochrome_White.png">
+                <div>
+                    <h4 class="title">Exposure</h4>
+                    <p>All Colloquial Tamil spoken by a local, and content is based off knowledge surrounding what tourists would experience in a foreign country</p>
+                </div>
             </div>
         </div>
-
-
-        <div id="motivs">
-            <p>This project is the artefact for my EPQ (Extended Project Qualification), that I am undertaking as part of my A-Levels</p>
-            <p>Some of the main motivations for this project for me is the fact that I have famiy in India, who converse in Tamil and also how I myself have experienced the problem of being in a
-                foreign country and not being able to understand the language.</p>
-        </div>
-
 
     </main>
 
@@ -131,7 +177,7 @@
         <div id="footerLinksBox" class="footerContent">
             <a class="footerLinks" href="" target="_blank" title="Leave a review!">Review</a>
             <a class="footerLinks" href="https://github.com/adityazisserman/Tamlish/issues" target="_blank" title="Report any issues!">Issues</a>
-            <a class="footerLinks" href="../about.html" title="About me and this project!">About</a>
+            <a class="footerLinks" href="./about.html" title="About me and this project!">About</a>
         </div>
         <div id="footerLogosBox" class="footerContent">
             <a href="./index.html" class="logoStyle" title="Homepage"><img src="./Images/tamlish_logo_inverted.png" id="tamlishLogo" alt="Tamlish logo" class="logos"></a>

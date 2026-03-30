@@ -8,12 +8,21 @@ body{
     flex-direction: column;
     min-height: 100vh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #e0ebff;
 }
 html{
     margin-bottom: 0px;
     padding: 0px;
     max-height: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
 }
+html::-webkit-scrollbar{
+    display: none;
+}
+
 main{
     flex: 1;
     color: white;
@@ -32,9 +41,9 @@ header{
     font-size: 15px;
     overflow: visible;
     height: 60px;
-    box-shadow: 0.5px 2px 2px rgb(122, 164, 255);
-    background-color: #DEECF5;
-    z-index: 1;
+    box-shadow: 0.5px 0.5px 0.5px rgb(174, 200, 255);
+    background-color: #e8f0fa;
+    z-index: 2;
 }
 .navbar{
     display: flex;
@@ -93,7 +102,7 @@ header{
 }
 
 .navbar #utilities #displayNameBtn{
-    color: green;
+    color: rgb(0, 119, 255);
     pointer-events: none;
     cursor: pointer;
 }
@@ -187,7 +196,15 @@ header{
     display: inline-block;
     cursor: pointer;
 }
-
+#wordsGoodLearnt{
+    color: green;
+}
+#wordsNeutralLearnt{
+    color: green;
+}
+#wordsBadLearnt{
+    color: red;
+}
 
 /* Authentication */
 
@@ -199,7 +216,7 @@ header{
     height: 100vh;
     width: 100vw;
     position: fixed;
-    z-index: 2;
+    z-index: 4;
     backdrop-filter: blur(11px);
     text-align: center;
 }
@@ -283,6 +300,23 @@ header{
     margin-top: 10px;
     color: rgb(19, 110, 255);
 }
+#haveAccountMessage{
+    margin-top: 10px;
+    color: rgb(19, 110, 255);
+}
+#signinBtn{
+    display: inline-block;
+    background-color: transparent;
+    color: rgb(1, 92, 249);
+    font-size: inherit;
+    text-decoration: none;
+    padding: 0;
+    margin-left: 5px;
+    box-shadow: none;
+}
+#signinBtn:hover{
+    text-decoration: underline;
+}
 #login{
     width: 80px;
     height: 40px;
@@ -328,162 +362,152 @@ header{
 /* Banner */
 
 #banner{
-    text-align: center;
-    padding: auto;
-    padding: 90px;
-    font-size: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: start;
+    padding-left: 60px;
+    gap: 22px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: blue;
-    text-shadow: 2px 3px 2px lightblue;
+    color: rgb(33, 85, 255);
     position: relative;
+    height: 82vh;
+    overflow: hidden;
+    cursor: default;
+    background-color: #e3ebff;
+    background: linear-gradient(180deg, #e8f0fa 0%, #3d87f7 60%, #0850f8 100%);
 }
-#banner #tamil{
-    animation-name: tamilMover;
-    animation-duration: 3s;
-    animation-iteration-count: 1;
-    position: absolute;
-    left: 0;
-    visibility: hidden;
+#banner #tamlishQuote{
+    z-index: 1;
+    font-size: 50px;
+    letter-spacing: -0.02em;
+    word-spacing: -4px;
+    line-height: 1.1;
+    color: #0066ff;
+    text-shadow: 0 0 40px rgba(156, 180, 243, 0.3);
+    width: 42vw;
 }
-#banner #english{
-    animation-name: englishMover;
-    animation-duration: 3s;
-    animation-iteration-count: 1;
-    position: absolute;
-    right: 0;;
-    visibility: hidden;
-}
-#banner #tamlish{
-    animation-name: hideShow;
-    animation-duration: 2.5s;
-    animation-iteration-count: 1;
-}
-#banner #slogan{
-    animation-name: hideShow;
-    animation-duration: 2.5s;
-    animation-iteration-count: 1;
-    font-size: 25px;
-    text-shadow: 1px 2px 1px blue;
-    color: white;
-}
-@keyframes tamilMover {
-    0% {
-        opacity: 1; 
-        visibility: visible;
-    }
-    100% {
-        transform: translateX(40vw);
-        opacity: 0;
-        visibility: hidden; 
-    }
-}
-@keyframes englishMover {
-    0% {
-        opacity: 1; 
-        visibility: visible;
-    }
-    100% {
-        transform: translateX(-40vw); 
-        opacity: 0; 
-        visibility: hidden; 
-    }
-}
-@keyframes hideShow {
-    0% {
-        opacity: 0;
-        visibility: hidden;
-    }
-    90%{
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-.animated-bg {
-    width: 100%;
-    height: 300px;
-    background: radial-gradient(circle,  #43a3df, #3340f3);
-    background-size: 150% 150%;
-    animation: pulseRadial 3s ease-in-out infinite; 
-    will-change: background-size;
+#bannerBar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: #e3ebff;
+    height: 9.5vh;
+    padding: 20px;
+    background-color: #0b53fc;
     overflow: hidden;
 }
+#bannerBar p{
+    padding: 22px;
+    flex: 1;
+    text-align: center;
+}
+#bannerBar p:not(:last-child){
+    border-right: 1px solid rgba(255,255,255,0.4);
+}
+#bannerBar .socialNums{
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+}
+canvas{
+  z-index: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#banner #slogan{
+    z-index: 1;
+    font-size: 20px;
+    color: #e0ebff;
+}
+#banner #getStartedBtn{
+    z-index: 1;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px;
+    margin-top: 12px;
+    font-size: 13px;
+    width: 140px;
+    text-align: center;
+    background-color: #0066ff;
+    color: white;
+    box-shadow: 2px 4px 8px rgb(0, 72, 255);;
+    border-radius: 14px;
+}
+#banner #getStartedBtn:hover{
+  transform: translateY(-2px);
+}
+#getStartedBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px rgb(26, 79, 214);
 
-@keyframes pulseRadial {
-    0%, 100% {
-        background-size: 150% 150%; 
-    }
-    50% {
-        background-size: 100% 100%;
-    }
 }
 
 /* Main */
 
-.title{
-    font-size: 18px;
-    font-weight: bold;
-}
-#overview{
+/* TODO update lesson and dictionary UI, so images can be put on homepage */
+
+.rotatingPhrasesCarousel{
     display: flex;
     flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+    color: black;
+    background: #94b5fc;
+    padding: 80px;
+}
+
+.carouselRotater{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: max-content;
+    animation: scroll-left 40s linear infinite;
+}
+
+.phrases{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: #3968EA;
-    padding: 50px;
-    text-align: center;
-    border-top: 0.1px solid blue;
+    align-items: center;
+    color: white;
+    background-color: rgb(0, 119, 255);
+    box-shadow: 0 10px 20px rgb(172, 192, 230);
+    flex-shrink: 0;
+    padding: 60px; 
+    white-space: nowrap;
 }
-#overview p{
-    padding: 12px;
-    width: 900px;
+.phrases div{
+    opacity: 0.7;
 }
-#features{
-    background-color: #0165F9;
-    padding: 50px;
-    font-size: 15px;
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: center;
-    flex-wrap: wrap;
+
+@keyframes scroll-left{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-33.3333%);
+    }
 }
-#features #lsns{
-    padding: 20px;
-    width: 50%;
-}
-#features #activs{
-    padding: 20px;
-    width: 50%;
-}
-#features #accessibility{
-    padding: 20px;
-    width: 50%;
-}
-#features #exposure{
-    padding: 20px;
-    width: 50%;
-}
-#subheading{
-    background-color: gold;
-    width: 100%;
-    text-align: center;
-}
+
 
 #conversation{
     display: flex;
     flex-direction: row;
-    gap: 300px;
-    padding: 0px;
-    height: 400px;
-    color: blue;
+    gap: 130px;
+    padding: 100px;
+    height: 80vh;
     text-align: center;
-    align-items: center;
     justify-content: center;
+    position: relative;
+    background-color: rgb(77, 159, 248);
 }
 #conversation a{
     height: fit-content;
@@ -491,73 +515,161 @@ header{
     flex-wrap: wrap;
 }
 #localBubble{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 250px;
     height: 180px;
-    align-self: end;
-    margin-right: 150px;
-    margin-bottom: 30px;
-    background-color: red;
-    animation-name: growLocal;
-    animation-duration: 4s;
+    opacity: 0;
+    position: relative;
+    align-self: flex-end;
+}
+#localBubble img{
+    height: fit-content;
+    width: fit-content;
+    transform: scale(0.4);
 }
 #touristBubble{
-    align-self: start;
-    transform: scaleX(-1);
-    margin-top: 50px;
-    margin-left: 120px;
-    background-color: black;
-    animation-name: growTourist;
-    animation-duration: 2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    position: relative;
+    width: 250px;
+    height: 180px;
+    align-self: flex-start;
+}
+#touristBubble img{
+    height: fit-content;
+    width: fit-content;
+    transform: scale(0.4);
 }
 #touristText{
     position: absolute;
-    background-color: green;
-    height: 100px;
-    width: 200px;
-    transform: translate(-290px,-70px);
+    z-index: 1;
+    color: white;
+    margin-bottom: 20px;
 }
 #localText{
     position: absolute;
-    background-color: green;
-    height: 100px;
-    width: 200px;
-    transform: translate(265px,60px);
+    color: white;
+    z-index: 1;
+    margin-bottom: 30px;
+}
+#touristSpeaker{
+    background-color: rgb(0, 102, 255);
+    width: 120px;
+    border-radius: 18px;
+    padding: 8px;
+    color: white;
+    position: absolute;
+    top: 290px;
+    left: 60px;
+}
+#localSpeaker{
+    background-color: rgb(0, 102, 255);
+    border-radius: 18px;
+    padding: 8px;
+    width: 120px;
+    position: absolute;
+    color: white;
+    align-self: flex-end;
+    bottom: 60px;
+    right: 60px;
+}
+#conversation button{
+    position: relative;
+    width: 100px;
+    z-index: 1;
+    border: none;
+    background: transparent;
+    color: #1a4fd6;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+#conversation button.activeConversation{
+    color: white;
+}
+#beforeAfterBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: fit-content;
+  margin-bottom: 20px;
+  height: fit-content;
+  position: relative;
+  align-self: center;
+  background-color: rgb(137, 187, 255);
+  border-radius: 999px;
+}
+#slider{
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  width: calc(50% - 4px);
+  background: #1a4fd6;
+  border-radius: 999px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+#slider.after{
+  transform: translateX(100%);
 }
 
 @keyframes growTourist {
-    0%{
-        transform: scaleX(-1) scale(0.2);
-    }
-    100%{
-        transform: scaleX(-1) scale(1);
-    }
+    0%{ transform: scale(0.2) scale(0.2); opacity: 0;}
+    100%{ transform: scale(1) scale(1); opacity: 1;}
 }
+
 @keyframes growLocal {
-    0%{
-        visibility: hidden;
-        transform: scale(0.2);
-    }
-    49%{
-        visibility: hidden;
-    }
-    50%{
-        visibility: visible;
-        transform: scale(0.2);
-    }
-    100%{
-        transform: scale(1);
-    }
+    0%{ transform: scale(0.2); opacity: 0;}
+    100%{ transform: scale(1); opacity: 1;}
 }
 
 
-#motivs{
-    background-color: #0052C8; 
-    padding: 50px;
+#features{
+    background-color: #5582ec;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    color: white;
 }
-#motivs p{
+#features img{
+    height: 300px;
+    width: fit-content;
+}
+#dictionary #dictionaryImgExample{
+    height: 200px;
+    width: 600px;
+}
+.featuresSectionLeft{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 200px;
     padding: 12px;
-    text-align: center;   
+    height: 50vh;
 }
+.featuresSectionRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 300px;
+    padding: 12px;
+    height: 50vh;
+}
+
+/* About page */
+
+.aboutSection{
+    color: black;
+}
+
 
 /* Footer */
 
