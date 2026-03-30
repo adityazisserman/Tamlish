@@ -25,6 +25,7 @@
     border: 2px solid rgb(0, 94, 255);
     border-radius: 10px;
     overflow: hidden;
+    color: rgb(0, 81, 255);
 }
 .table th{
     color: rgb(0, 110, 255);
@@ -73,9 +74,10 @@ button{
 }
 input{
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid rgb(0, 119, 255);
     border-radius: 8px;
     outline: none;
+    background-color: rgb(222, 230, 255);
 }
 input:focus{
     border: 2px solid rgb(0, 136, 255);
@@ -94,4 +96,13 @@ main{
 }
 .current{
     background-color: color-mix(in srgb, rgb(0, 136, 255) 65%, black);
+}
+#wordsTableMessage, #phrasesTableMessage{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding-top: 12px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgb(0, 98, 255);
 }

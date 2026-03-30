@@ -219,7 +219,7 @@ function populateTable(array, table) {
 
 const options = {
   keys: ["proficiency","english", "tamlish"],
-//   threshold: 0.9, 
+  threshold: 0.4, 
 };
 
 function search(query){
