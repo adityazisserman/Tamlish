@@ -5,10 +5,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
+    <link rel="stylesheet" href="themeStyle.css">
+    <link rel="icon" type="image/png" href="./Images/Logos/favicon.png">
 </head>
 
 <body>
+    <div id="loginpg" class="authpg">
+        <div id="loginPgUI" class="authpgUI">
+            <h3 class="signText">Sign In <span class="material-symbols-outlined" id="LIexitBtn">close</span></h3>
+            <label for="sign-in-email">Email</label>
+            <input type="email" placeholder="example@gmail.com" id="sign-in-email" minlength="6" required>
+            <label for="sign-in-password">Password</label>
+            <input type="password" id="sign-in-password" minlength="6" required>
+            <button id="login">Log In</button>
+            <button class="googleLoginBtn"><img src="./Images/Logos/Google_White.png" class="googleLogo">Sign in with Google</button>
+            <span id="noAccountMessage">Don't have an account? <button id="signupBtn">Sign Up</button></span>
+            <h3 id="errorPage1"></h3>
+        </div>
+    </div>
+    <div id="signuppg" class="authpg">
+        <div id="signupPgUI" class="authpgUI">
+            <h3 class="signText">Sign Up <span class="material-symbols-outlined" id="SUexitBtn">close</span></h3>
+            <label for="sign-up-email">Email:</label>
+            <input type="email" placeholder="example@gmail.com" id="sign-up-email" minlength="6" required>
+            <label for="sign-up-password">Password:</label>
+            <input type="password" id="sign-up-password" minlength="6" required>
+            <button id="signUp">Sign Up</button>
+            <button class="googleLoginBtn"><img src="./Images/Logos/Google_White.png" class="googleLogo"> Sign up with Google</button>
+            <span id="haveAccountMessage">Already have an account? <button id="signinBtn">Sign In</button></span>
+            <h3 id="errorPage2"></h3>
+        </div>
+    </div>
 
+    <header id="header">
+        <nav class="navbar">
+            <ul id="logo">
+                <li>
+                    <img src="Images/Logos/favicon.png" width="20px" height="20px" id="icon">
+                    <a href="index.html">TAMLISH</a>
+                </li>
+            </ul>
+            <ul id="utilities">
+                <li><a href="Lessons/lessons.html" id="lessonsBtn">Lessons</a></li>
+                <li><a href="Dictionary/dictionary.html" id="dictionaryBtn">Dictionary</a></li>
+                <li id="settingsLi"><a href="Settings/settings.html" id="settingsBtn">Settings</a></li>
+                <li id="wrapper">
+                    <div id="pointer"><a id="loginBtn">Sign in</a></div>
+                    <div id="statsGUI">
+                        <h4 id="userStatsText">User Statistics <span class="material-symbols-outlined" id="statsexitBtn">close</span></h4>
+                        <div id="userStats">
+                            <div>Words Learnt & Proficiency: <br>
+                                Good: <span id="wordsGoodLearnt"></span><br>
+                                Neutral: <span id="wordsNeutralLearnt"></span><br>
+                                Bad: <span id="wordsBadLearnt"></span></div><br>
+                            <div>Lessons Completed: <span id="lessonsCompleted"></span></div>
+                        </div>
+                        <button id="signoutBtn">Sign Out</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="overview" class="aboutSection">
+            <p>The purpose of this website is to teach Colloquial (Spoken) Tamil to tourists, using the teaching method known as transliteration (teaching foreign language using another language's
+                writing system/script - in this case English) </p>
+            <p>Tamil is a language that dates back over 2 millenia and has 2 distinct dialects - Colloquial and Literary Tamil. As tourists wish for the most part to be able to communicate with
+                and understand the locals, only Colloquial Tamil needs to be taught, to a basic level.</p>
+        </div>
+
+        <div id="motivs" class="aboutSection">
+            <p>This project is the artefact for my EPQ (Extended Project Qualification), that I am undertaking as part of my A-Levels</p>
+            <p>Some of the main motivations for this project for me is the fact that I have famiy in India, who converse in Tamil and also how I myself have experienced the problem of being in a
+                foreign country and not being able to understand the language.</p>
+        </div>
+    </main>
+
+    <footer id="footer">
+        <div id="footerProductSummary" class="footerContent">Tamlish: Spoken Tamil for tourists, no foreign script required</div>
+        <div id="footerLinksBox" class="footerContent">
+            <a class="footerLinks" href="" target="_blank" title="Leave a review!">Review</a>
+            <a class="footerLinks" href="https://github.com/adityazisserman/Tamlish/issues" target="_blank" title="Report any issues!">Issues</a>
+            <a class="footerLinks" href="./about.html" title="About me and this project!">About</a>
+        </div>
+        <div id="footerLogosBox" class="footerContent">
+            <a href="./index.html" class="logoStyle" title="Homepage"><img src="./Images/Logos/tamlish_logo_inverted.png" id="tamlishLogo" alt="Tamlish logo" class="logos"></a>
+            <a href="https://github.com/adityazisserman/Tamlish" class="logoStyle" title="Source code" target="_blank"><img src="./Images/Logos/GitHub_White.png" alt="Github logo" class="logos"></a>
+            <a href="https://firebase.google.com/" class="logoStyle" title="Firebase (host)" target="_blank"><img src="./Images/Logos/Firebase-White.png" alt="Firebase logo" class="logos"></a>
+        </div>
+    </footer>
+    <script src="index.js" type="module"></script>
 </body>
 
 </html>
