@@ -140,6 +140,7 @@ let sAnswer;
 function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage){
     const wordelement = document.getElementById(wordElement);
     const cachedProficiency = JSON.parse(localStorage.getItem("cachedProficiency")) || {};
+    const soundbtn = displayedSection.querySelector(".soundBtn");
 
     if (questionLanguage){
         if (questionLanguage === "english"){
@@ -162,7 +163,7 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
         sQuestionLanguage = vocab[vocabid].question[1];
         answerOption = vocab[vocabid].answer;
         if(soundBtn){
-            const soundbtn = displayedSection.querySelector(`.${soundBtn}`);
+            soundbtn.style.display = "block";
             const audiosrc = `../Audio/${questionTextID}.mp3`;
             const audio = audioCache[audiosrc];
             soundbtn.onclick = () => {
@@ -171,6 +172,9 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
                     audio.play();
                 }
             };
+        }
+        else{
+            soundbtn.style.display = "none";
         }
         if (vocab[vocabid].type === "image"){
             wordelement.textContent = vocab[questionTextID][sQuestionLanguage];
@@ -213,16 +217,19 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
         }
 
         if (soundBtn){
-                const soundbtn = displayedSection.querySelector(`.${soundBtn}`);
-                soundbtn.onclick = () => {
-                    const audiosrc = `../Audio/${vocabid}.mp3`;
-                    const audio = audioCache[audiosrc];
-                    if (audio){
-                        audio.currentTime = 0;
-                        audio.play();
-                    }
-                };
-            }
+            soundbtn.style.display = "block";
+            soundbtn.onclick = () => {
+                const audiosrc = `../Audio/${vocabid}.mp3`;
+                const audio = audioCache[audiosrc];
+                if (audio){
+                    audio.currentTime = 0;
+                    audio.play();
+                }
+            };
+        }
+        else{
+            soundbtn.style.display = "none";
+        }
     }
 };
 

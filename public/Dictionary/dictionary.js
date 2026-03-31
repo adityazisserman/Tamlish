@@ -27,7 +27,7 @@ const tableCache = {
     vocabVersion: "cachedVocabVersion",
     proficiency: "cachedProficiency"
 };
-const APP_VERSION = "1.0"
+const VOCAB_VERSION = "1.2.1"
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -39,7 +39,7 @@ onAuthStateChanged(auth, async (user) => {
 
         // caching vocab data
         if (serverVocabVersion !== localVocabVersion || !localStorage.getItem(tableCache.vocab)){
-            const response = await fetch(`dictionary.json?v=${APP_VERSION}`);
+            const response = await fetch(`dictionary.json?v=${VOCAB_VERSION}`);
             vocab = await response.json();
             localStorage.setItem(tableCache.vocab, JSON.stringify(vocab));
             if (serverVocabVersion) {
@@ -96,7 +96,7 @@ onAuthStateChanged(auth, async (user) => {
 
         const settingsLi = document.getElementById("settingsLi");
         settingsLi.style.display = "none";
-        wordsTableMessageBox.textContent = "Sign in to view your vocab";
+        wordsTableMessageBox.textContent = "Sign in to view your vocabulary";
         activeTab = "words";
     }
 });
@@ -110,11 +110,11 @@ wordsSwitchBtn.addEventListener("click", () => {
     phrasesTableMessageBox.style.display = "none";
     activeTab = "words";
     if (!currentUser && isSearchActive){ 
-        wordsTableMessageBox.textContent = "Sign in to search your vocab";
+        wordsTableMessageBox.textContent = "Sign in to search your vocabulary";
         return; 
     }
     else if (!currentUser && !isSearchActive){
-        wordsTableMessageBox.textContent = "Sign in to view your vocab";
+        wordsTableMessageBox.textContent = "Sign in to view your vocabulary";
         return; 
     }    updateMessage(
         isSearchActive ? currentWordsResults : wordsArray,
@@ -132,11 +132,11 @@ phrasesSwitchBtn.addEventListener("click", () => {
     phrasesTableMessageBox.style.display = "block";
     activeTab = "phrases"
     if (!currentUser && isSearchActive){ 
-        phrasesTableMessageBox.textContent = "Sign in to search your vocab";
+        phrasesTableMessageBox.textContent = "Sign in to search your vocabulary";
         return; 
     }
     else if (!currentUser && !isSearchActive){
-        phrasesTableMessageBox.textContent = "Sign in to view your vocab";
+        phrasesTableMessageBox.textContent = "Sign in to view your vocabulary";
         return; 
     }
     updateMessage(
@@ -259,7 +259,7 @@ backBtn.addEventListener("click", () => {
     searchQuery.value = "";
     if (!currentUser){
         messageBox = activeTab === "words" ? wordsTableMessageBox : phrasesTableMessageBox;
-        messageBox.textContent = "Sign in to view your vocab";
+        messageBox.textContent = "Sign in to view your vocabulary";
         return;
     }
     populateTable(wordsArray, wordsTableBody);

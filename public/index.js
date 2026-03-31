@@ -13,6 +13,8 @@ const signUp = document.getElementById("signUp");
 const login = document.getElementById("login");
 const wrapper = document.getElementById("wrapper");
 const signoutBtn = document.getElementById("signoutBtn");
+const getStartedBtn = document.getElementById("getStartedBtn");
+const haveAccountBtn = document.getElementById("signinBtn");
 const sign_in_email = loginpg.querySelector("input[type='email']");
 const sign_in_password = loginpg.querySelector("input[type='password']");
 const sign_up_email = signuppg.querySelector("input[type='email']");
@@ -46,6 +48,18 @@ signinBtn.addEventListener("click", () => {
     errorpage2.textContent = ""
     document.body.style.overflow = "hidden" // disables scrolling
 });
+
+if (document.title === "Tamlish"){
+  getStartedBtn.addEventListener("click", () => {
+    signuppg.style.display = "flex";
+    document.body.style.overflow = "hidden"
+});
+}
+
+haveAccountBtn.addEventListener("click", () =>{
+  signuppg.style.display = "none";
+  loginpg.style.display = "flex";
+})
 
 LIexitBtn.addEventListener("click", () => {
     loginpg.style.display = "none";
@@ -208,6 +222,10 @@ onAuthStateChanged(auth, (user) => {
 
       wrapper1.addEventListener("mousedown", (e) => {
           e.stopPropagation();
+      });
+
+      stats.addEventListener("click", (e) => {
+        e.stopPropagation();
       });
 
       statsexitBtn.addEventListener("click", (e) => {

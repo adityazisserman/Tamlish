@@ -46,7 +46,7 @@ function continueLesson(){
     else if (switchedSectionTo() === "writeTamlishWord1"){
         // Write the tamlish word section
         switchSection(pickHeardWord, writeWord)
-        questionData("t1w1", false, "question3", "soundBtn", "english")
+        questionData("t1w1", false, "question3", null, "english")
         markSection("t1w1","typedInput","writeEnglishWord1")
     }
     else if (switchedSectionTo() === "writeEnglishWord1"){
@@ -64,7 +64,7 @@ function continueLesson(){
     else if (switchedSectionTo() === "writeTamlishWord2"){
         // Write the tamlish word section
         switchSection(writeWord, writeWord)
-        questionData("t1w2", false, "question3", "soundBtn", "english")
+        questionData("t1w2", false, "question3", null, "english")
         markSection("t1w2","typedInput","hearPhrase1")
     }
     else if (switchedSectionTo() === "hearPhrase1"){
@@ -76,7 +76,7 @@ function continueLesson(){
     else if (switchedSectionTo() === "writeTamlishPhrase1"){
         // Write the tamlish phrase section
         switchSection(pickHeardWord, writeWord)
-        questionData("t1p1", false, "question3", "soundBtn", "english")
+        questionData("t1p1", false, "question3", null, "english")
         markSection("t1p1","typedInput","writeEnglishPhrase1")
     }
     else if (switchedSectionTo() === "writeEnglishPhrase1"){

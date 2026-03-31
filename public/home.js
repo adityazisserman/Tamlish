@@ -34,14 +34,14 @@ function triggerConversationAnimation(){
       touristText.textContent = "";
       touristBubble.style.animation = "growLocal 2s forwards";
       touristBubble.addEventListener("animationend", ()=>{
-          touristText.textContent = `[Expressive hand articulations attempting to mime train station]`;
+          touristText.textContent = `[Expressive hand articulations attempting to mime cost of a souvenir]`;
         }, { once: true })
     }, 400)
     setTimeout(() => {
       localText.textContent = "";
       localBubble.style.animation = "growTourist 2s forwards";
       localBubble.addEventListener("animationend", () =>{
-          localText.textContent = `"Mannikkavum ninkal enna colla varukirirkal enru puriyavillai (I'm sorry I do not understand what you are trying to say)`;
+          localText.textContent = `"Yennaku puriyele" (I don't understand)`;
         }, { once: true })
     }, 1000);
   }
@@ -64,7 +64,7 @@ function conversationAnimate(state) {
         touristBubble.style.animation = "growLocal 2s forwards";
         touristBubble.style.visibility = "visible";
         touristBubble.addEventListener("animationend", ()=>{
-          touristText.textContent = `[Expressive hand articulations attempting to mime train station]`;
+          touristText.textContent = `[Expressive hand articulations attempting to mime cost of a souvenir]`;
         }, { once: true })
       },0)
       setTimeout(() => {
@@ -74,7 +74,7 @@ function conversationAnimate(state) {
         localBubble.style.animation = "growTourist 2s forwards";
         localBubble.style.visibility = "visible";
         localBubble.addEventListener("animationend", () =>{
-          localText.textContent =  `"Mannikkavum ninkal enna colla varukirirkal enru puriyavillai (I'm sorry I do not understand what you are trying to say)`;
+          localText.textContent =  `"Yennaku puriyele" (I don't understand)`;
         }, { once: true })
       }, 500);
       }
@@ -89,8 +89,7 @@ function conversationAnimate(state) {
       touristBubble.style.animation = "growLocal 2s forwards";
       touristBubble.style.visibility = "visible";
       touristBubble.addEventListener("animationend", ()=>{
-          touristText.textContent = `"Nan eppati rayil nilaiyattirku celvatu
-" (How do I get to the train station)`;
+          touristText.textContent = `"Adhu yevalo vele?" (What is the price of that?)`;
         }, { once: true })
     }, 0)
     setTimeout(() => {
@@ -100,7 +99,7 @@ function conversationAnimate(state) {
       localBubble.style.animation = "growTourist 2s forwards";
       localBubble.style.visibility = "visible";
       localBubble.addEventListener("animationend", () =>{
-          localText.textContent = `"Teruvil, valatupuram cenru, neraka cellunkal" (Down the street, turn right, then go straight)`;
+          localText.textContent = `"Adhu rendhu rubai" (That is two rupees)`;
         }, { once: true })
     }, 500);
   }
