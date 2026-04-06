@@ -19,10 +19,21 @@
             <input type="email" placeholder="example@gmail.com" id="sign-in-email" minlength="6" required>
             <label for="sign-in-password">Password</label>
             <input type="password" id="sign-in-password" minlength="6" required>
+            <h4 id="forgotPasswordBtn">Forgot password?</h4>
             <button id="login">Log In</button>
             <button class="googleLoginBtn"><img src="../Images/Logos/Google_White.png" class="googleLogo">Sign in with Google</button>
             <span id="noAccountMessage">Don't have an account? <button id="signupBtn">Sign Up</button></span>
             <h3 id="errorPage1"></h3>
+        </div>
+    </div>
+    <div id="resetPasswordpg" class="authpg">
+        <div id="resetPasswordPgUI" class="authpgUI">
+            <h3 class="signText">Reset Password<span class="material-symbols-outlined" id="RPexitBtn">close</span></h3>
+            <h4 id="commandPR">Enter email for password reset email to be sent</h4>
+            <label for="sign-in-email">Email</label>
+            <input type="email" placeholder="example@gmail.com" id="passwordResetEmail" minlength="6" required>
+            <button id="sendPasswordResetEmailBtn">Reset Password</button>
+            <h3 id="confirmationMessage"></h3>
         </div>
     </div>
     <div id="signuppg" class="authpg">

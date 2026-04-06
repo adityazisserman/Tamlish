@@ -19,10 +19,21 @@
             <input type="email" placeholder="example@gmail.com" id="sign-in-email" minlength="6" required>
             <label for="sign-in-password">Password</label>
             <input type="password" id="sign-in-password" minlength="6" required>
+            <h4 id="forgotPasswordBtn">Forgot password?</h4>
             <button id="login">Log In</button>
             <button class="googleLoginBtn"><img src="../Images/Logos/Google_White.png" class="googleLogo">Sign in with Google</button>
             <span id="noAccountMessage">Don't have an account? <button id="signupBtn">Sign Up</button></span>
             <h3 id="errorPage1"></h3>
+        </div>
+    </div>
+    <div id="resetPasswordpg" class="authpg">
+        <div id="resetPasswordPgUI" class="authpgUI">
+            <h3 class="signText">Reset Password<span class="material-symbols-outlined" id="RPexitBtn">close</span></h3>
+            <h4 id="commandPR">Enter email for password reset email to be sent</h4>
+            <label for="sign-in-email">Email</label>
+            <input type="email" placeholder="example@gmail.com" id="passwordResetEmail" minlength="6" required>
+            <button id="sendPasswordResetEmailBtn">Reset Password</button>
+            <h3 id="confirmationMessage"></h3>
         </div>
     </div>
     <div id="signuppg" class="authpg">
@@ -71,30 +82,41 @@
 
     <main>
         <br>
-        <div id="usernameSection">
-            <label for="usernameChange">Change Username</label>
+        <div id="usernameSection" class="settingsSection">
+            <label for="usernameChange" class="settingsLabel">Change Username</label>
             <input id="usernameChange"><button id="setUsernameBtn">Set</button>
-        </div><br>
-        <div id="emailSection">
-            <label for="emailChange">Change Email</label>
+        </div>
+        <div id="emailSection" class="settingsSection">
+            <label for="emailChange" class="settingsLabel">Change Email</label>
             <input id="emailChange"><button id="setEmailBtn">Set</button>
-            <div id="loginpg1">
-                <div id="emailVerifierUI">
-                    <span class="material-symbols-outlined" id="EVexitBtn">close</span>
-                    <h3>Verify</h3><br><br>
-                    <label for="sign-in-email">Email:</label>
-                    <input type="email" placeholder="adityazisserman@gmail.com" id="sign-in-email" minlength="6" required><br>
-                    <label for="sign-in-password">Password:</label>
-                    <input type="password" id="sign-in-password" minlength="6" required><br><br>
-                    <button id="EVBtn">Update Email</button><br><br>
-                    <h3 id="errorPages1"></h3>
-                    <h3 id="errorPages2"></h3>
-                </div>
+        </div>
+        <div id="loginpg1" class="verifypg">
+            <div id="emailVerifierUI">
+                <h3 class="verifyText">Verify <span class="material-symbols-outlined" id="EVexitBtn">close</span></h3>
+                <label for="sign-in-email">Email:</label>
+                <input type="email" placeholder="adityazisserman@gmail.com" id="sign-in-email" minlength="6" required><br>
+                <label for="sign-in-password">Password:</label>
+                <input type="password" id="sign-in-password" minlength="6" required><br><br>
+                <button id="EVBtn">Update Email</button><br><br>
+                <h3 id="errorPages1"></h3>
+                <h3 id="errorPages2"></h3>
             </div>
-        </div><br>
-        <div id="passwordSection">
-            <div>Reset Password:</div><button id="resetPasswordBtn">Reset</button>
-        </div> <br>
+        </div>
+        <div id="passwordSection" class="settingsSection">
+            <label for="passwordReset" class="settingsLabel">Change Password</label><input id="newPassword"><button id="resetPasswordBtn">Set</button>
+        </div>
+        <div id="loginpg2" class="verifypg">
+            <div id="passwordVerifierUI">
+                <h3 class="verifyText">Verify <span class="material-symbols-outlined" id="PVexitBtn">close</span></h3>
+                <label for="sign-in-email">Email:</label>
+                <input type="email" placeholder="adityazisserman@gmail.com" id="passwordVerifierEmail" minlength="6" required><br>
+                <label for="sign-in-password">Password:</label>
+                <input type="password" id="passwordVerifier" minlength="6" required><br><br>
+                <button id="PVBtn">Update Password</button><br><br>
+                <h3 id="errorPagess1"></h3>
+                <h3 id="errorPagess2"></h3>
+            </div>
+        </div>
     </main>
 
     <footer id="footer">

@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, db, getDoc, doc, setDoc, updateEmail, signInWithEmailAndPassword, sendPasswordResetEmail } from "../firebase-config.js";
+import { auth, onAuthStateChanged, db, getDoc, doc, setDoc, updateEmail, signInWithEmailAndPassword, updatePassword } from "../firebase-config.js";
 
 const usernameSection = document.getElementById("usernameSection");
 const emailSection = document.getElementById("emailSection");
@@ -14,8 +14,8 @@ onAuthStateChanged(auth, (user) => {
     if (user != null) {
         user.providerData.forEach((profile) => {
             if (profile.providerId !== "google.com") {
-                emailSection.style.display = "block"
-                passwordSection.style.display = "block"
+                emailSection.style.display = "flex"
+                passwordSection.style.display = "flex"
             }
         });
     }
@@ -50,7 +50,6 @@ setEmailBtn.addEventListener("click", () => {
                 // Signed in 
                 const user = userCredential.user;
                 console.log("User signed in:", user.email);
-                loginpg.style.display = "none"
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -74,15 +73,44 @@ setEmailBtn.addEventListener("click", () => {
 });
 
 const resetPasswordBtn = document.getElementById("resetPasswordBtn");
+const newPassword = document.getElementById("newPassword");
+const PVpg = document.getElementById("loginpg2");
+const passwordEmailVerifier = PVpg.querySelector("input[type='email']");
+const passwordPasswordVerifier = PVpg.querySelector("input[type='password']");
+const PVBtn = document.getElementById("PVBtn");
+const PVexitBtn = document.getElementById("PVexitBtn");
+const errorPagess1 = document.getElementById("errorPagess1");
+const errorPagess2 = document.getElementById("errorPagess2");
 
 resetPasswordBtn.addEventListener("click", () => {
-    const user = auth.currentUser;
-    sendPasswordResetEmail(auth, user.email)
-        .then(() => {
-            console.log("Password reset email sent!");
-        })
-        .catch((error) => {
-            console.error(error);
-            alert(error.message);
-        });
+    PVpg.style.display = "flex";
+    PVexitBtn.addEventListener("click", () => {
+        PVpg.style.display = "none"
+    })
+    PVBtn.addEventListener("click", () => {
+        signInWithEmailAndPassword(auth, passwordEmailVerifier.value, passwordPasswordVerifier.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("User signed in:", user.email);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log("Sign in error:", errorCode, errorMessage)
+                errorPagess1.textContent = errorMessage;
+            });
+        const user = auth.currentUser;
+
+        updatePassword(user, newPassword.value)
+            .then(() => {
+                console.log("Password updated!");
+                PVpg.style.display = "none";
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(error);
+                errorPagess2.textContent = errorMessage;
+            });
+    })
 });

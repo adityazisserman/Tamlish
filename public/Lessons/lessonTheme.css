@@ -218,7 +218,7 @@ textarea{
     margin-top: auto;
     width: 95vw;
     border-radius: 18px;
-    align-self: baseline;
+    align-self: center;
 }
 #cancelLessonBox button:hover{
     box-shadow: 2px 3px color-mix(in srgb, rgb(8, 77, 205) 78%, black);

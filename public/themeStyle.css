@@ -122,14 +122,17 @@ header{
 #wrapper{
     text-align: center;
     margin-right: 40px;
-    min-width: none;
 }
-#wrapper1{
-    min-width: 18ch;
+#utilities #wrapper1{
     text-align: center;
     position: relative;
-    display: inline-block;    
+    display: inline-flex;
+    justify-content: center;    
+    align-items: center;
     vertical-align: middle;
+    margin-right: 0px;
+    padding: 0px;
+    min-width: 10ch;
 }
 #pointer{
     cursor: pointer;
@@ -149,7 +152,7 @@ header{
     border-radius: 15px;
     position: absolute;
     top: 44px;
-    left: -75px;
+    left: -8ch;
     padding: 4px;
     gap: 12px;
 }
@@ -186,7 +189,7 @@ header{
     margin-bottom: 12px;
     color: white;
     background-color: rgb(1, 117, 249);
-    box-shadow: 2px 2px rgb(48, 145, 255);
+    box-shadow: 3px 3px rgb(48, 145, 255);
     border-radius: 8px;
 }
 #signoutBtn:active{
@@ -340,13 +343,7 @@ header{
     margin-bottom: -20px;
     opacity: 0.8;
 }
-#loginPgUI #LIexitBtn{
-    position: static;
-    transform: scale(1.4);
-    cursor: pointer;
-}
-
-#signupPgUI #SUexitBtn{
+#signupPgUI #SUexitBtn, #loginPgUI #LIexitBtn, #RPexitBtn{
     position: absolute;
     right: 5px;
     top: 5px;
@@ -357,6 +354,28 @@ header{
 #errorPage1, #errorPage2{
     font-size: small;
     color: red;
+}
+#forgotPasswordBtn{
+    color: rgb(71, 129, 255);
+    font-size: 12px;
+    width: 300px;
+    text-align: right;
+    margin-bottom: -10px;
+    margin-top: -18px;
+    padding: 0px;
+    opacity: 0.8;
+    font-weight: 300;
+    cursor: pointer;
+}
+#forgotPasswordBtn:hover{
+    color: rgb(10, 68, 194);
+}
+#resetPasswordpg{
+    display: none;
+}
+#commandPR{
+    font-size: 13px;
+    color: #0066ff;
 }
 
 #landingPage{

@@ -12,7 +12,7 @@
 main{
     color: black;
 }
-#loginpg1{
+#loginpg1,#loginpg2{
     top: 0;
     display: none;
     justify-content: center;
@@ -24,27 +24,60 @@ main{
     backdrop-filter: blur(11px);
     text-align: center;
 }
-#emailVerifierUI{
-    background-color: white;
-    height: 90vh;
-    width: 60vh;
+#emailVerifierUI,#passwordVerifierUI{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start ;
+    align-items: center;
+    background-color: #EEF2FB;
+    height: 550px;
+    width: 400px;
     border-radius: 30px;
-    padding: 15px;
-    padding-top: 5px;
-    width: fit-content;
     text-align: center;
     position: relative;
+    gap: 22px;
+    padding: 6px;
 }
-
-#emailVerifierUI input{
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 12px;
+    background-color: rgb(1, 117, 249);
+    box-shadow: 2px 2px rgb(48, 145, 255);
+    border-radius: 8px;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+}
+input{
     width: 300px;
-}
-#emailVerifierUI h3{
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(0, 119, 255);
+    outline: none;
+    background-color: rgb(236, 240, 255);
+    color: rgb(0, 106, 255);}
+#emailVerifierUI h3, #passwordVerifierUI h3{
     display: inline-block;
     width: fit-content;
+    padding: 12px;
+}
+.verifypg #emailVerifierUI .verifyText, .verifypg #passwordVerifierUI .verifyText{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0 25px;
+    justify-self: flex-start;
+    color: rgb(0, 119, 255);
+    font-weight: 600;
+    margin-bottom: 30px;
 }
 
-#emailVerifierUI #EVexitBtn{
+#emailVerifierUI #EVexitBtn, #passwordVerifierUI #PVexitBtn{
     position: absolute;
     right: 5px;
     top: 5px;
@@ -54,4 +87,43 @@ main{
 }
 #emailSection, #passwordSection{
     display: none;
+}
+#loginpg1 label, #loginpg2 label{
+    color: rgb(71, 129, 255);
+    font-size: 13px;
+    width: 300px;
+    text-align: left;
+    margin-bottom: -20px;
+    opacity: 0.8;
+}
+button:active{
+    box-shadow: 1px 1px rgb(48, 145, 255);
+}
+input::placeholder{
+    color: rgb(71, 129, 255);
+    opacity: 0.6;
+}
+input:focus{
+    box-shadow: 0 0 0 2px rgb(0, 106, 255);
+}
+#errorPages1, #errorPages2, #errorPagess1, #errorPagess2{
+    font-size: small;
+    color: red;
+}
+.settingsSection{
+    display: flex;
+    gap: 12px;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.settingsLabel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px;
+    margin-left: 8px;
+    color: rgb(0, 21, 255);
 }

@@ -1,7 +1,7 @@
 
 // login/signup
 
-import { auth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, db, collection, doc, getDoc, setDoc, addDoc, getDocs } from "./firebase-config.js";
+import { auth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, db, collection, doc, getDoc, setDoc, addDoc, getDocs, sendPasswordResetEmail } from "./firebase-config.js";
 
 const loginpg = document.getElementById("loginpg");
 const LIexitBtn = document.getElementById("LIexitBtn");
@@ -9,20 +9,25 @@ const SUexitBtn = document.getElementById("SUexitBtn");
 const signinBtn = document.getElementById("loginBtn");
 const signupBtn = document.getElementById("signupBtn");
 const signuppg = document.getElementById("signuppg");
+const resetPasswordpg = document.getElementById("resetPasswordpg");
 const signUp = document.getElementById("signUp");
 const login = document.getElementById("login");
 const wrapper = document.getElementById("wrapper");
 const signoutBtn = document.getElementById("signoutBtn");
 const getStartedBtn = document.getElementById("getStartedBtn");
 const haveAccountBtn = document.getElementById("signinBtn");
+const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+const sendPasswordResetEmailBtn = document.getElementById("sendPasswordResetEmailBtn");
+const RPexitBtn = document.getElementById("RPexitBtn");
 const sign_in_email = loginpg.querySelector("input[type='email']");
 const sign_in_password = loginpg.querySelector("input[type='password']");
 const sign_up_email = signuppg.querySelector("input[type='email']");
 const sign_up_password = signuppg.querySelector("input[type='password']");
 const utilitiesNavbar = document.getElementById("utilities");
+const passwordResetEmail = document.getElementById("passwordResetEmail");
 const stats = document.getElementById('statsGUI');
-const errorpage1 = document.getElementById("errorPage1")
-const errorpage2 = document.getElementById("errorPage2")
+const errorpage1 = document.getElementById("errorPage1");
+const errorpage2 = document.getElementById("errorPage2");
 
 document.addEventListener("keydown", (event) =>{
   if (event.key === "Escape"){
@@ -32,6 +37,7 @@ document.addEventListener("keydown", (event) =>{
     else{
       loginpg.style.display = "none";
       signuppg.style.display = "none";
+      resetPasswordpg.style.display = "none";
     }
   }
 })
@@ -117,8 +123,27 @@ login.addEventListener("click", () => {
   });
 })
 
-let displayName;
+forgotPasswordBtn.addEventListener("click", () =>{
+  resetPasswordpg.style.display = "flex";
+  loginpg.style.display = "none";
+  const resetEmailMessage = document.getElementById("confirmationMessage");
+  sendPasswordResetEmailBtn.addEventListener("click", ()=>{
+    sendPasswordResetEmail(auth, passwordResetEmail.value)
+    .then(async () => {
+      resetEmailMessage.textContent = "Reset email sent"
+    })
+    .catch((error) =>{
+      console.log(error);
+      resetEmailMessage.textContent("Error: ", error.message)
+    })
+  })
+})
 
+RPexitBtn.addEventListener("click", () =>{
+  resetPasswordpg.style.display = "none";
+})
+
+let displayName;
 
 function getProviderDisplayName(user){
     for (const profile of user.providerData) {
@@ -151,7 +176,7 @@ onAuthStateChanged(auth, (user) => {
       signinBtn.id = "displayNameBtn";
       wrapper.id = "wrapper1"
       const wrapper1 = document.getElementById("wrapper1")
-      wrapper1.style.minWidth = "18ch";
+      wrapper1.style.width = `${displayName.length * 1.1}ch`;
 
       const statsexitBtn = document.getElementById("statsexitBtn")
 
@@ -241,7 +266,6 @@ onAuthStateChanged(auth, (user) => {
             signinBtn.textContent = "Sign In"
             wrapper.id = "wrapper"
             stats.style.display = "none"
-            wrapper.style.minWidth = "";
             signinBtn.style.visibility = "visible";
             location.reload();
           })
@@ -254,6 +278,8 @@ onAuthStateChanged(auth, (user) => {
   else {
     signinBtn.style.visibility = "visible";
     utilitiesNavbar.style.display = "flex";
+    const settingsLi = document.getElementById("settingsLi");
+    settingsLi.style.display = "none";
   }
 })
 
