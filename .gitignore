@@ -68,6 +68,4 @@ node_modules/
 # dataconnect generated files
 .dataconnect
 
-/public/firebase-config.js
-
-.github/copilot-instructions.md
+firebase-config.js
