@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, db, doc, getDocs, getDoc, collection, serverTimestamp } from "../../../firebase-config.js";
+import { auth, onAuthStateChanged, db, doc, getDocs, getDoc, collection, serverTimestamp } from "../firebase-config.js";
 
 const wordsTableBody = document.getElementById("wordsTable").querySelector("tbody");
 const phrasesTableBody = document.getElementById("phrasesTable").querySelector("tbody");

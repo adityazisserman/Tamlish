@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, getDoc, db, doc } from "../../../firebase-config.js";
+import { auth, onAuthStateChanged, getDoc, db, doc } from "../firebase-config.js";
 
 const exampleLessonSection = document.getElementById("exampleLessonBanner");
 const actualLessons = document.querySelectorAll(".actualLessons");

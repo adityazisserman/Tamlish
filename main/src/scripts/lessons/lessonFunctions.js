@@ -1,4 +1,4 @@
-import { auth, doc, setDoc, db, onAuthStateChanged, getDoc, serverTimestamp } from "../../../../firebase-config.js";
+import { auth, doc, setDoc, db, onAuthStateChanged, getDoc, serverTimestamp } from "../../firebase-config.js";
 
 let answered = false;
 let switchedTo;

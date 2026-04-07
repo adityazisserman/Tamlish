@@ -1,7 +1,7 @@
 
 // login/signup
 
-import { auth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, db, collection, doc, getDoc, setDoc, addDoc, getDocs, sendPasswordResetEmail } from "../../../firebase-config.js";
+import { auth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, db, collection, doc, getDoc, setDoc, addDoc, getDocs, sendPasswordResetEmail } from "../firebase-config.js";
 
 const loginpg = document.getElementById("loginpg");
 const LIexitBtn = document.getElementById("LIexitBtn");

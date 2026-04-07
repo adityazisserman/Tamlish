@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, db, getDoc, doc, setDoc, updateEmail, signInWithEmailAndPassword, updatePassword } from "../../../firebase-config.js";
+import { auth, onAuthStateChanged, db, getDoc, doc, setDoc, updateEmail, signInWithEmailAndPassword, updatePassword } from "../firebase-config.js";
 
 const usernameSection = document.getElementById("usernameSection");
 const emailSection = document.getElementById("emailSection");
