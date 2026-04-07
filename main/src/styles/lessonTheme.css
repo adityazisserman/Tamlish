@@ -1,0 +1,408 @@
+*{
+    box-sizing: border-box;
+}
+:root{
+    --resultBox-bg-colour: ;
+    --nextSectionBtn-bg-colour: ;
+}
+button{
+    cursor: pointer;
+    color: white;
+}
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: #e3ebff;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    flex: 1;
+    position: relative;
+    color: black;
+}
+
+/* HUD */
+
+.progressBarContainer{
+    margin-top: 20px;
+    background-color: rgb(0, 145, 255);
+    width: 92%;
+    height: 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+#progressBar{
+    width: 0%;
+    height: 100%;
+    background-color: rgb(46, 109, 246);
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+.exitBtn{
+    float: right;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: black;
+    transform: scale(1.2);
+    top: 13px;
+    right: 25px;
+    padding: 5px;
+    color: rgb(0, 72, 255);
+}
+
+/* Main content */
+
+.lessonSection{
+    align-self: center;
+    display: none;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(36, 90, 216);
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    gap: 15px;
+}
+.question{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.questionCommand{
+    align-self: flex-start;
+}
+.questionData{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 6px;
+    margin-top: 12px;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+.imgs{
+    width: 200px;
+    height: 200px;
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+.imgs.clicked{
+    border: 2px solid rgb(6, 86, 214);
+}
+.heardWords.clicked{
+    border: 2px solid rgb(6, 86, 214);
+}
+main .lessonSection.writeWord{
+    gap: 15px;
+    justify-content: flex-start;
+    margin-top: 100px;
+}
+.lessonSection.writeWord .question{
+    gap: 20px;
+}
+.resultBox{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--resultBox-bg-colour);
+    padding: 15px;
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: fit-content;
+    z-index: 3;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    transform: translateY(100%);
+    gap: 10px;
+}
+#messages{
+    margin-left: 12px;
+}
+.animated{
+    transform: translateY(0);
+}
+.notAnimated{
+    transform: translateY(100%);
+}
+textarea{
+    width: 300px;
+    height: 111px;
+    resize: none;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #273dff;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-decoration: none;
+    color: rgb(27, 71, 247);
+    background-color: #d6dff5;
+}
+#lessonOverlay{
+    position: absolute;
+    background: transparent;
+    inset: 0;   
+    display: none;
+}
+#answerMessage, #messageBox{
+    height: fit-content;
+}
+#userFeedbackBox{
+    display: none;
+    float: right;
+}
+#userFeedbackBox button{
+    border: none;
+    border-radius: 5px;
+    margin-left: 6px;
+    height: 40px;
+    width: 40px;
+    background-color: rgb(255, 66, 66);
+}
+#userFeedbackBox button:hover{
+    box-shadow: 2px 4px color-mix(in srgb , rgb(255, 66, 66) 75%, black);
+}
+#userFeedbackBox span{
+    transform: scale(1.4);
+}
+#userFeedbackBox .feedbackClicked{
+    background-color: color-mix(in srgb, rgb(255, 66, 66) 75%, black);
+    pointer-events: none;
+}
+#userFeedbackBox button:disabled{
+    pointer-events: none;
+}
+#messages{
+    float: left;
+}
+#cancelLessonBox{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    background-color: rgb(26, 112, 251);
+    padding: 15px;
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: fit-content;
+    margin-left: 0px;
+    z-index: 4;
+    transform: translateY(100%);
+    gap: 5px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+#cancelLessonBox.notAnimated{
+    transform: translateY(100%);
+}
+#cancelLessonBox.animated{
+    transform: translateY(0);
+}
+#cancelLessonBox button{
+    background-color: rgb(0, 157, 255);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    width: 95vw;
+    border-radius: 18px;
+    align-self: center;
+}
+#cancelLessonBox button:hover{
+    box-shadow: 2px 3px color-mix(in srgb, rgb(8, 77, 205) 78%, black);
+}
+#cancelLessonBox button:active{
+    top: 3px;
+    box-shadow: 2px 2px color-mix(in srgb, rgb(8, 77, 205) 78%, black);
+}
+.soundBtn{
+    transform: scale(1.3);
+    color: rgb(44, 133, 243);
+    cursor: pointer;
+    text-shadow: 1px 0.2px 0.1px rgb(30, 93, 231);
+}
+.soundBtn:hover{
+    transform: scale(1.5);
+}
+.soundBtn:active{
+    text-shadow: 0.2px 0.2px rgb(30, 93, 231);
+}
+
+.checkBtn{
+    align-self: center;
+    background-color: rgb(108, 170, 218);
+    opacity: 0.6;
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: 95vw;
+    border-radius: 18px;
+    pointer-events: none;
+    color: rgb(63, 60, 60);
+}
+
+.answered{
+    color: white;
+    pointer-events: all;
+    background-color: rgb(0, 145, 255);
+    opacity: 1;
+}
+.answered:hover{
+    box-shadow: 2px 5px rgb(0, 128, 255);
+}
+.answered:active{
+    top: 3px;
+    box-shadow: 2px 2px rgb(0, 128, 255);
+}
+#nextSectionBtn{
+    background-color: var(--nextSectionBtn-bg-colour);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    width: 95vw;
+    border-radius: 18px;
+    align-self: center;
+}
+#nextSectionBtn:hover{
+    box-shadow: 2px 5px color-mix(in srgb, var(--nextSectionBtn-bg-colour) 75%, black);
+}
+#nextSectionBtn:active{
+    top: 3px;
+    box-shadow: 2px 2px color-mix(in srgb, var(--nextSectionBtn-bg-colour) 75%, black);
+}
+.choose_heard_word .questionData{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+}
+.heardWords{
+    text-align: center;
+    padding: 15px;
+    width: 150px;
+    border: 1px solid blue;
+    border-radius: 4px;
+    margin: 6px;
+}
+.choose_heard_word .options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+.options{
+    cursor: pointer;
+}
+.lesson_end{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 60vw;
+    gap: 20px;
+    margin-top: 20px;
+}
+#endLessonBtn{
+    align-self: center;
+    background-color: rgb(37, 125, 239);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: 95vw;
+    border-radius: 18px;
+    transition: ease-in-out ;
+}
+#endLessonBtn:hover{
+    box-shadow: 2px 5px rgb(10, 97, 211);
+}
+#endLessonBtn:active{
+    top: 3px;
+    box-shadow: 2px 3px rgb(10, 97, 211);
+}
+#questionMarks{
+    border: 2px solid rgb(0, 106, 255);
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 500px;
+    text-align: center;
+}
+#questionMarks td{
+    border-bottom: 2px solid rgb(0, 106, 255);
+    border-right: 2px solid rgb(0, 106, 255);
+    padding: 8px 16px;
+}
+#questionMarks td:last-child{
+    border-right: none;
+}
+#questionMarks td:first-child{
+    color: rgb(0, 106, 255);
+}
+#questionMarks tr:last-child td{
+    border-bottom: none;
+}
+#exampleLessonSection{
+    display: none;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#exampleLessonText{
+    color: rgb(0, 110, 255);
+    margin-top: auto;
+    justify-self: center;
+    font-size: 17px;
+}
+#exitExampleBtn{
+    align-self: center;
+    background-color: rgb(37, 125, 239);
+    border: none;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    margin-bottom: 8px;
+    width: 95vw;
+    border-radius: 18px;
+    transition: ease-in-out ;
+}
+#exitExampleBtn:hover{
+    box-shadow: 2px 5px rgb(10, 97, 211);
+}
+#exitExampleBtn:active{
+    top: 3px;
+    box-shadow: 2px 3px rgb(10, 97, 211);
+}
+#endText{
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 19px;
+}
+#timerResult, #averageResult{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.results{
+    font-weight: 600;
+}

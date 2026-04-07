@@ -1,0 +1,58 @@
+{
+    "t1w1":{
+        "english": "Hello",
+        "tamlish": "Vanakkam"
+    },
+    "t1w2":{
+        "english": "Thank you",
+        "tamlish": "Nandri"
+    },
+    "t1w3":{
+        "english": "Goodbye",
+        "tamlish": "Taataa"
+    },
+    "t1w4":{
+        "english": "Please",
+        "tamlish": "Dhayavuceydhu"
+    },
+    "t1p1":{
+        "english": "How are you",
+        "tamlish": "Yeppidi irrukay"
+    },
+    "t1p2":{
+        "english": "I am fine",
+        "tamlish": "Nana irrukayn"
+    },
+    "t1p3":{
+        "english": "What is your name?",
+        "tamlish": "Won payer yenna?"
+    },
+    "t1s1":{
+        "type": "image",
+        "answer": "option2",
+        "question": ["t1w1","tamlish"]
+    },
+    "t1s2":{
+        "type": "heardWord",
+        "answer": "option4",
+        "question": ["t1w1","tamlish"],
+        "questiondata": ["t1w4","t1w2","t1w3","t1w1"]
+    },
+    "t1s3":{
+        "type": "image",
+        "answer": "option3",
+        "question": ["t1w2","tamlish"]
+    },
+    "t1s4":{
+        "type": "heardWord",
+        "answer": "option2",
+        "question": ["t1w2","tamlish"],
+        "questiondata": ["t1w1","t1w2","t1w4","t1w3"]
+    },
+    "t1s5":{
+        "type": "heardWord",
+        "answer": "option4",
+        "question": ["t1p1","tamlish"],
+        "questiondata": ["t1w4","t1p2","t1w3","t1p1"]
+    }
+}

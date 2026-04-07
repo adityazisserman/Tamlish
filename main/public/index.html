@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamlish</title>
+    <link rel="stylesheet" href="../src/styles/tamlishTheme.css">
+    <link rel="icon" type="image/png" href="../src/images/logos/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
+</head>
+
+<body>
+    <div id="loginpg" class="authpg">
+        <div id="loginPgUI" class="authpgUI">
+            <h3 class="signText">Sign In <span class="material-symbols-outlined" id="LIexitBtn">close</span></h3>
+            <label for="sign-in-email">Email</label>
+            <input type="email" placeholder="example@gmail.com" id="sign-in-email" minlength="6" required>
+            <label for="sign-in-password">Password</label>
+            <input type="password" id="sign-in-password" minlength="6" required>
+            <h4 id="forgotPasswordBtn">Forgot password?</h4>
+            <button id="login">Log In</button>
+            <button class="googleLoginBtn"><img src="../src/images/logos/google-white.png" class="googleLogo">Sign in with Google</button>
+            <span id="noAccountMessage">Don't have an account? <button id="signupBtn">Sign Up</button></span>
+            <h3 id="errorPage1"></h3>
+        </div>
+    </div>
+    <div id="resetPasswordpg" class="authpg">
+        <div id="resetPasswordPgUI" class="authpgUI">
+            <h3 class="signText">Reset Password<span class="material-symbols-outlined" id="RPexitBtn">close</span></h3>
+            <h4 id="commandPR">Enter email for password reset email to be sent</h4>
+            <label for="sign-in-email">Email</label>
+            <input type="email" placeholder="example@gmail.com" id="passwordResetEmail" minlength="6" required>
+            <button id="sendPasswordResetEmailBtn">Reset Password</button>
+            <h3 id="confirmationMessage"></h3>
+        </div>
+    </div>
+    <div id="signuppg" class="authpg">
+        <div id="signupPgUI" class="authpgUI">
+            <h3 class="signText">Sign Up <span class="material-symbols-outlined" id="SUexitBtn">close</span></h3>
+            <label for="sign-up-email">Email:</label>
+            <input type="email" placeholder="example@gmail.com" id="sign-up-email" minlength="6" required>
+            <label for="sign-up-password">Password:</label>
+            <input type="password" id="sign-up-password" minlength="6" required>
+            <button id="signUp">Sign Up</button>
+            <button class="googleLoginBtn"><img src="../src/images/logos/google-white.png" class="googleLogo"> Sign up with Google</button>
+            <span id="haveAccountMessage">Already have an account? <button id="signinBtn">Sign In</button></span>
+            <h3 id="errorPage2"></h3>
+        </div>
+    </div>
+
+    <header id="header">
+        <nav class="navbar">
+            <ul id="logo">
+                <li>
+                    <img src="../src/images/logos/favicon.png" width="20px" height="20px" id="icon">
+                    <a href="index.html">TAMLISH</a>
+                </li>
+            </ul>
+            <ul id="utilities">
+                <li><a href="lessons.html" id="lessonsBtn">Lessons</a></li>
+                <li><a href="dictionary.html" id="dictionaryBtn">Dictionary</a></li>
+                <li id="settingsLi"><a href="settings.html" id="settingsBtn">Settings</a></li>
+                <li id="wrapper">
+                    <div id="pointer"><a id="loginBtn">Sign in</a></div>
+                    <div id="statsGUI">
+                        <h4 id="userStatsText">User Statistics <span class="material-symbols-outlined" id="statsexitBtn">close</span></h4>
+                        <div id="userStats">
+                            <div>Words Learnt & Proficiency: <br>
+                                Good: <span id="wordsGoodLearnt"></span><br>
+                                Neutral: <span id="wordsNeutralLearnt"></span><br>
+                                Bad: <span id="wordsBadLearnt"></span></div><br>
+                            <div>Lessons Completed: <span id="lessonsCompleted"></span></div>
+                        </div>
+                        <button id="signoutBtn">Sign Out</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="landingPage">
+        <div id="banner" class="animated-bg">
+            <canvas id="canvas"></canvas>
+            <a id="tamlishQuote">Converse easily with locals in Tamil</a>
+            <a id="slogan">Learning spoken Tamil using English, for tourists</a>
+            <button id="getStartedBtn">Get Started</button>
+        </div>
+        <div id="bannerBar">
+            <p><span class="socialNums">1000+</span> Words and Phrases</p>
+            <p><span class="socialNums">100+</span> Lessons</p>
+            <p><span class="socialNums">10+</span> Topics</p>
+        </div>
+
+
+        <div class="rotatingPhrasesCarousel">
+            <div class="carouselRotater">
+                <div class="phrases">Vanakkam<div class="italics">(Hello)</div>
+                </div>
+                <div class="phrases">Nandri<div class="italics">(Thank You)</div>
+                </div>
+                <div class="phrases">Yeppidi irrukay?<div class="italics">(How are you?)</div>
+                </div>
+                <div class="phrases">Nanna irrukayn<div class="italics">(I am fine)</div>
+                </div>
+                <div class="phrases">Won payer yenna?<div class="italics">(What is your name?)</div>
+                </div>
+                <div class="phrases">Vanakkam<div class="italics">(Hello)</div>
+                </div>
+                <div class="phrases">Nandri<div class="italics">(Thank You)</div>
+                </div>
+                <div class="phrases">Yeppidi irruku?<div class="italics">(How are you?)</div>
+                </div>
+                <div class="phrases">Nana irrukayn<div class="italics">(I am fine)</div>
+                </div>
+                <div class="phrases">Won payer yenna?<div class="italics">(What is your name?)</div>
+                </div>
+                <div class="phrases">Vanakkam<div class="italics">(Hello)</div>
+                </div>
+                <div class="phrases">Nandri<div class="italics">(Thank You)</div>
+                </div>
+                <div class="phrases">Yeppidi irruku?<div class="italics">(How are you?)</div>
+                </div>
+                <div class="phrases">Nana irrukayn<div class="italics">(I am fine)</div>
+                </div>
+                <div class="phrases">Won payer yenna?<div class="italics">(What is your name?)</div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="conversation">
+            <div id="touristBubble">
+                <div id="touristText"></div>
+                <img alt="Bubble" src="../src/images/indexAssests/speechbubble.png">
+            </div>
+            <div id="touristSpeaker">[TOURIST]</div>
+            <div id="beforeAfterBox">
+                <div id="slider"></div>
+                <button id="beforebtn">Before Tamlish</button>
+                <button id="afterbtn">After Tamlish</button>
+            </div>
+            <div id="localBubble">
+                <div id="localText"></div>
+                <img alt="Bubble" src="../src/images/indexAssests/speechbubble_flipped.png">
+            </div>
+            <div id="localSpeaker">[LOCAL]</div>
+        </div>
+
+
+
+        <div id="features">
+            <div id="lsns" class="featuresSectionLeft">
+                <div>
+                    <h4>Lessons</h4>
+                    <p>Covering a variety of suitable topics relevant for tourists, and utiliises teaching methods backed both by research and proven in the field in existing applications (marking
+                        algo)</p>
+                </div>
+                <img id="lessonsImgExample" src="../src/images/indexAssests/lessons_example.png">
+            </div>
+            <div id="activs" class="featuresSectionRight">
+                <img id="activitiesImgExample" src="../src/images/indexAssests/activities_example.png">
+                <div>
+                    <h4 class="title">Interactive activities</h4>
+                    <p>Including listening, reading and writing exercises, as well as many other acitvties such as mutliple choice and pictoral based questions</p>
+                </div>
+            </div>
+            <div id="dictionary" class="featuresSectionLeft">
+                <div>
+                    <h4>Dictionary</h4>
+                    <p>Dictionary, containing all the vocabulary you learn, as well as your proficiency </p>
+                </div>
+                <img id="dictionaryImgExample" src="../src/images/indexAssests/dictionary.png">
+            </div>
+            <div id="exposure" class="featuresSectionRight">
+                <img id="exposureImgExample" src="../src/images/indexAssests/audio_visualisation.png">
+                <div>
+                    <h4 class="title">Exposure</h4>
+                    <p>All Colloquial Tamil spoken by a local, and content is based off knowledge surrounding what tourists would experience in a foreign country</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer id="footer">
+        <div id="footerProductSummary" class="footerContent">Tamlish: Spoken Tamil for tourists, no foreign script required</div>
+        <div id="footerLinksBox" class="footerContent">
+            <a class="footerLinks" href="" target="_blank" title="Leave a review!">Review</a>
+            <a class="footerLinks" href="https://github.com/adityazisserman/Tamlish/issues" target="_blank" title="Report any issues!">Issues</a>
+            <a class="footerLinks" href="about.html" title="About me and this project!">About</a>
+        </div>
+        <div id="footerLogosBox" class="footerContent">
+            <a href="index.html" class="logoStyle" title="Homepage"><img src="../src/images/logos/tamlish_logo_inverted.png" id="tamlishLogo" alt="Tamlish logo" class="logos"></a>
+            <a href="https://github.com/adityazisserman/Tamlish" class="logoStyle" title="Source code" target="_blank"><img src="../src/images/logos/github-white.png" alt="Github logo"
+                    class="logos"></a>
+            <a href="https://firebase.google.com/" class="logoStyle" title="Firebase (host)" target="_blank"><img src="../src/images/logos/firebase-white.png" alt="Firebase logo" class="logos"></a>
+        </div>
+    </footer>
+
+    <script src="../src/scripts/auth.js" type="module"></script>
+    <script src="../src/scripts/index.js" type="module"></script>
+
+</body>
+
+</html>

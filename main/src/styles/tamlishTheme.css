@@ -1,0 +1,775 @@
+*{
+    box-sizing: border-box;
+
+}
+body{
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #e0ebff;
+}
+html{
+    margin-bottom: 0px;
+    padding: 0px;
+    max-height: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
+}
+html::-webkit-scrollbar{
+    display: none;
+}
+
+main{
+    flex: 1;
+    color: white;
+}
+button{
+    cursor: pointer;
+}
+
+
+/* Navigation Bar */
+
+header{
+    position: sticky;
+    top: 0px;
+    font-family: Verdana;
+    font-size: 15px;
+    overflow: visible;
+    height: 60px;
+    box-shadow: 0.5px 0.5px 0.5px rgb(174, 200, 255);
+    background-color: #e8f0fa;
+    z-index: 2;
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar #utilities{
+    list-style-type: none;
+    display: none;
+    gap: 0px;
+    margin-right: 8px;
+}
+.navbar #utilities li{  
+    margin-left: 40px;
+}
+.navbar #utilities a{
+    text-decoration: none;
+    padding: 10px;
+    color: blue;
+    border-radius: 12px;
+    top:0;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.navbar #logo{
+    list-style-type: none;
+    padding-left: 30px;
+}
+.navbar #logo a{
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+    font-size: 18px;
+}
+.navbar #logo:hover{
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+
+}
+
+.navbar #utilities a:hover{
+    background-color: rgb(56, 129, 255);
+    color: white;
+    box-shadow: 2px 5px rgb(29, 97, 243);
+} 
+
+.navbar #utilities a:active{
+    top: 3px;
+    box-shadow: 2px 2px rgb(29, 97, 243);
+   
+} 
+.navbar #utilities #loginBtn{
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.navbar #utilities #displayNameBtn{
+    color: rgb(0, 119, 255);
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.navbar #utilities #displayNameBtn:hover{
+    background-color: #DEECF5;
+    box-shadow: none;
+}
+
+.navbar #utilities #displayNameBtn:active{
+    top: 0px;
+    box-shadow: 0px 0px black;
+}
+#icon{
+    transform: translateY(3px);
+}
+#wrapper{
+    text-align: center;
+    margin-right: 40px;
+}
+#utilities #wrapper1{
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;    
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 0px;
+    padding: 0px;
+    min-width: 10ch;
+}
+#pointer{
+    cursor: pointer;
+    min-width: none;
+}
+
+/* User statistics */
+
+#statsGUI{
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 300px;
+    width: 250px;
+    background-color: #EEF2FB;
+    border-radius: 15px;
+    position: absolute;
+    top: 44px;
+    left: -8ch;
+    padding: 4px;
+    gap: 12px;
+}
+#userStatsText{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    justify-self: flex-start;
+    margin-bottom: 20px;
+    color: rgb(0, 119, 255);
+    font-weight: 600;
+    gap: 70px;
+    margin-top: 10px;
+}
+#userStats{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    color: rgb(0, 110, 255);
+}
+#signoutBtn{
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    height: 40px;
+    width: 200px;
+    border: none;
+    margin-bottom: 12px;
+    color: white;
+    background-color: rgb(1, 117, 249);
+    box-shadow: 3px 3px rgb(48, 145, 255);
+    border-radius: 8px;
+}
+#signoutBtn:active{
+    box-shadow: 1px 1px rgb(48, 145, 255);
+}
+#statsexitBtn{
+    display: inline-block;
+    cursor: pointer;
+}
+#wordsGoodLearnt{
+    color: green;
+}
+#wordsNeutralLearnt{
+    color: green;
+}
+#wordsBadLearnt{
+    color: red;
+}
+
+/* Authentication */
+
+.authpg{
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 4;
+    backdrop-filter: blur(11px);
+    text-align: center;
+}
+.authpgUI{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start ;
+    align-items: center;
+    background-color: #EEF2FB;
+    height: 550px;
+    width: 400px;
+    border-radius: 30px;
+    text-align: center;
+    position: relative;
+    gap: 22px;
+    padding: 6px;
+}
+.authpgUI .signText{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 25px;
+    justify-self: flex-start;
+    color: rgb(0, 119, 255);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.authpg button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 12px;
+    background-color: rgb(1, 117, 249);
+    box-shadow: 2px 2px rgb(48, 145, 255);
+    border-radius: 8px;
+    border: none;
+    width: fit-content;
+    height: fit-content;
+}
+.authpgUI button:active{
+    box-shadow: 1px 1px rgb(48, 145, 255);
+}
+.authpgUI input{
+    width: 300px;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(0, 119, 255);
+    outline: none;
+    background-color: rgb(236, 240, 255);
+    color: rgb(0, 106, 255);
+}
+.authpgUI input::placeholder{
+    color: rgb(71, 129, 255);
+    opacity: 0.6;
+}
+.authpgUI input:focus{
+    box-shadow: 0 0 0 2px rgb(0, 106, 255);
+}
+.googleLogo{
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+#signupBtn{
+    display: inline-block;
+    background-color: transparent;
+    color: rgb(1, 92, 249);
+    font-size: inherit;
+    text-decoration: none;
+    padding: 0;
+    margin-left: 5px;
+    box-shadow: none;
+}
+#signupBtn:hover{
+    text-decoration: underline;
+}
+#noAccountMessage{
+    margin-top: 10px;
+    color: rgb(19, 110, 255);
+}
+#haveAccountMessage{
+    margin-top: 10px;
+    color: rgb(19, 110, 255);
+}
+#signinBtn{
+    display: inline-block;
+    background-color: transparent;
+    color: rgb(1, 92, 249);
+    font-size: inherit;
+    text-decoration: none;
+    padding: 0;
+    margin-left: 5px;
+    box-shadow: none;
+}
+#signinBtn:hover{
+    text-decoration: underline;
+}
+#login{
+    width: 80px;
+    height: 40px;
+    margin-top: 20px;
+}
+#signUp{
+    width: 80px;
+    height: 40px;
+    margin-top: 20px;
+}
+.authpgUI h3{
+    display: inline-block;
+    width: fit-content;
+    padding: 12px;
+}
+.authpgUI label{
+    color: rgb(71, 129, 255);
+    font-size: 13px;
+    width: 300px;
+    text-align: left;
+    margin-bottom: -20px;
+    opacity: 0.8;
+}
+#signupPgUI #SUexitBtn, #loginPgUI #LIexitBtn, #RPexitBtn{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 20px;
+    transform: scale(1.4);
+    cursor: pointer;
+}
+#errorPage1, #errorPage2{
+    font-size: small;
+    color: red;
+}
+#forgotPasswordBtn{
+    color: rgb(71, 129, 255);
+    font-size: 12px;
+    width: 300px;
+    text-align: right;
+    margin-bottom: -10px;
+    margin-top: -18px;
+    padding: 0px;
+    opacity: 0.8;
+    font-weight: 300;
+    cursor: pointer;
+}
+#forgotPasswordBtn:hover{
+    color: rgb(10, 68, 194);
+}
+#resetPasswordpg{
+    display: none;
+}
+#commandPR{
+    font-size: 13px;
+    color: #0066ff;
+}
+
+#landingPage{
+        background: linear-gradient(to bottom, 
+    #0B53FC 0%,     
+    #2263e6 30%, 
+    #2263e6 50%,
+    #689ef4 80%,
+    #93bdff 100%
+  );
+}
+
+/* Banner */
+
+#banner{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: start;
+    padding-left: 60px;
+    gap: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(33, 85, 255);
+    position: relative;
+    height: 82vh;
+    overflow: hidden;
+    cursor: default;
+    background-color: #e3ebff;
+    background: linear-gradient(180deg, #e8f0fa 0%, #3d87f7 60%, #0850f8 100%);
+}
+#banner #tamlishQuote{
+    z-index: 1;
+    font-size: 50px;
+    letter-spacing: -0.02em;
+    word-spacing: -4px;
+    line-height: 1.1;
+    color: #0066ff;
+    text-shadow: 0 0 40px rgba(156, 180, 243, 0.3);
+    width: 42vw;
+}
+#bannerBar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: #e3ebff;
+    height: 9.5vh;
+    padding: 20px;
+    background-color: #0b53fc;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+#bannerBar p{
+    padding: 22px;
+    flex: 1;
+    text-align: center;
+}
+#bannerBar p:not(:last-child){
+    border-right: 1px solid rgba(255,255,255,0.4);
+}
+#bannerBar .socialNums{
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+}
+canvas{
+  z-index: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#banner #slogan{
+    z-index: 1;
+    font-size: 20px;
+    color: #e0ebff;
+}
+#banner #getStartedBtn{
+    z-index: 1;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px;
+    margin-top: 12px;
+    font-size: 13px;
+    width: 140px;
+    text-align: center;
+    background-color: #0066ff;
+    color: white;
+    box-shadow: 2px 4px 8px rgb(0, 72, 255);;
+    border-radius: 14px;
+}
+#banner #getStartedBtn:hover{
+  transform: translateY(-2px);
+}
+#getStartedBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 8px rgb(26, 79, 214);
+
+}
+
+/* Main */
+
+/* TODO update lesson and dictionary UI, so images can be put on homepage */
+
+.rotatingPhrasesCarousel{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    padding: 80px;
+}
+
+.carouselRotater{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: max-content;
+    animation: scroll-left 40s linear infinite;
+}
+
+.phrases{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(72, 152, 244);
+    box-shadow: 2px 5px 10px rgb(172, 192, 230);
+    flex-shrink: 0;
+    padding: 60px; 
+    white-space: nowrap;
+}
+.phrases div{
+    opacity: 0.7;
+}
+.italics{
+    font-style: italic;
+}
+
+@keyframes scroll-left{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-33.3333%);
+    }
+}
+
+
+#conversation{
+    display: flex;
+    flex-direction: row;
+    gap: 130px;
+    padding: 100px;
+    height: 80vh;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    background-color: transparent;
+}
+#conversation a{
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+}
+#localBubble{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 180px;
+    opacity: 0;
+    position: relative;
+    align-self: flex-end;
+}
+#localBubble img{
+    height: fit-content;
+    width: fit-content;
+    transform: scale(0.4);
+}
+#touristBubble{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    position: relative;
+    width: 250px;
+    height: 180px;
+    align-self: flex-start;
+}
+#touristBubble img{
+    height: fit-content;
+    width: fit-content;
+    transform: scale(0.4);
+}
+#touristText{
+    position: absolute;
+    z-index: 1;
+    color: #1a4fd6;
+    margin-bottom: 20px;
+}
+#localText{
+    position: absolute;
+    color: #1a4fd6;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+#touristSpeaker{
+    background-color: rgb(137, 187, 255);
+    width: 120px;
+    border-radius: 18px;
+    padding: 8px;
+    color: #1a4fd6;
+    font-weight: bold;
+    position: absolute;
+    top: 290px;
+    left: 60px;
+}
+#localSpeaker{
+    background-color: rgb(137, 187, 255);
+    border-radius: 18px;
+    padding: 8px;
+    width: 120px;
+    position: absolute;
+    color: #1a4fd6;
+    align-self: flex-end;
+    bottom: 60px;
+    right: 60px;
+    font-weight: bold;
+}
+#conversation button{
+    position: relative;
+    width: 100px;
+    z-index: 1;
+    border: none;
+    background: transparent;
+    color: #1a4fd6;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+#conversation button.activeConversation{
+    color: white;
+}
+#beforeAfterBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: fit-content;
+  margin-bottom: 20px;
+  height: fit-content;
+  position: relative;
+  align-self: center;
+  background-color: rgb(137, 187, 255);
+  border-radius: 999px;
+}
+#slider{
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  width: calc(50% - 4px);
+  background: #1a4fd6;
+  border-radius: 999px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+#slider.after{
+  transform: translateX(100%);
+}
+
+@keyframes growTourist {
+    0%{ transform: scale(0.2) scale(0.2); opacity: 0;}
+    100%{ transform: scale(1) scale(1); opacity: 1;}
+}
+
+@keyframes growLocal {
+    0%{ transform: scale(0.2); opacity: 0;}
+    100%{ transform: scale(1); opacity: 1;}
+}
+
+
+#features{
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    color: white;
+}
+#features img{
+    height: 300px;
+    width: fit-content;
+}
+#dictionary #dictionaryImgExample{
+    height: 200px;
+    width: 700px;
+}
+#dictionary{
+    color: #004ce4;
+}
+#exposure{
+    color: #0850f8;
+}
+.featuresSectionLeft{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 100px;
+    padding: 12px;
+    height: 50vh;
+}
+.featuresSectionRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 200px;
+    padding: 12px;
+    height: 50vh;
+}
+
+/* About page */
+
+.aboutSection{
+    color: black;
+}
+
+
+/* Footer */
+
+#footer{
+    background-color:rgb(56, 106, 255);
+    color: white;
+    height: fit-content;
+    font-family: Verdana;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+#footerProductSummary{
+    font-size: 12px;
+    flex: 1;
+}
+#footerLinksBox{
+    align-self: center;
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+#footerLogosBox{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.logos{
+    height: 35px;
+    width: 35px;
+    transform: scale(0.7);
+}
+.logoStyle{
+    display: inline-flex;
+    border-radius: 100%;
+    background-color: rgb(0, 85, 255);
+    overflow: hidden;
+}
+.logoStyle:hover{
+    background-color: color-mix(in srgb, rgb(0, 85, 255) 75%, black);
+}
+#tamlishLogo{
+    transform: scale(0.6) scaleX(1.2);
+}
+.footerLinks{
+    text-decoration: none;
+}
+.footerLinks:hover{
+    text-decoration: underline;
+    color: blue;
+}
+.footerLinks:visited{
+    color: white;
+}
+#footerProductSummary{
+    opacity: 0.8;
+}
+

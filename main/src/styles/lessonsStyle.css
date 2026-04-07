@@ -1,0 +1,56 @@
+.navbar #utilities #lessonsBtn{
+    text-decoration: underline;
+    text-decoration-color: rgb(0, 104, 249);
+    color: rgb(0, 104, 249);
+}
+.navbar #utilities #lessonsBtn:hover{
+    text-decoration: none;
+    background-color: rgb(117, 165, 249);
+    color: white;
+    box-shadow: 2px 5px rgb(88, 133, 230);
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+a{
+    text-decoration: none;
+}
+.lessonBanner{
+    color: white;
+    background-color: rgb(34, 138, 243);
+    cursor: pointer;
+    width: 98vw;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 12px;
+}
+.lessonBanner hr{
+    color: white;
+}
+#exampleLessonBanner{
+    display: none;
+}
+.lessonBanner:hover{
+    box-shadow: 2px 5px rgb(4, 90, 219);
+}
+.lessonBanner:active{
+    top: 3px;
+    box-shadow: 2px 2px rgb(4, 90, 219);
+}
+.greyedOut{
+    pointer-events: none;
+}
+.greyedOut .lessonBanner{
+    background-color: gray;
+}
+.completed div{
+    background-color: rgb(13, 90, 197);
+}
+.completed:hover div{
+    box-shadow: 2px 4px rgb(0, 106, 255);
+}
