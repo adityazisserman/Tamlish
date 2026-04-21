@@ -229,7 +229,7 @@ header{
     justify-content: flex-start ;
     align-items: center;
     background-color: #EEF2FB;
-    height: 550px;
+    height: fit-content;
     width: 400px;
     border-radius: 30px;
     text-align: center;
