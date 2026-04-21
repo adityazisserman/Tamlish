@@ -21,9 +21,11 @@ onAuthStateChanged(auth, (user) => {
 let vocab;
 const audioCache = {};
 const imageCache = {}
+const wordsShown = new Set();
 
 async function fetchLessonData(){
-    const response = await fetch("../../src/dictionary.json");
+    const basePath = window.location.hostname === '127.0.0.1' ? '/main' : '';
+    const response = await fetch(`${basePath}/src/dictionary.json`);
     const data = await response.json();
     vocab = data;
 
@@ -120,6 +122,13 @@ function switchSection(currentSection, nextSection) {
         selectedFeedback = null;
         selectedElement = null;
         typedWordPointer.value = "";
+        
+        // Reset feedback buttons
+        feedbackBtns.forEach(btn => {
+            btn.classList.remove("feedbackClicked");
+            btn.disabled = false;
+        });
+        
         if (nextSection === lessonEnd){
             lessonHud.style.display = "none";
             checkBtn.style.display = "none";
@@ -184,6 +193,7 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
             option3.src = imageCache[`../../src/images/${vocabid}/option3.png`].src;
             option4.src = imageCache[`../../src/images/${vocabid}/option4.png`].src;
 
+            wordsShown.add(questionTextID);
             selectorMessage.textContent = `${vocab[questionTextID].tamlish} means ${vocab[questionTextID].english}!`;
         }
         else if (vocab[vocabid].type === "heardWord"){
@@ -194,13 +204,26 @@ function questionData(vocabid, selector, wordElement, soundBtn, questionLanguage
             
             sAnswer = vocab[questionTextID][sQuestionLanguage];
 
-            const isNew = !cachedProficiency[questionTextID];
+            const isNew = !wordsShown.has(questionTextID) && (!cachedProficiency || !cachedProficiency[questionTextID]);
+            
+            if (isNew) {
+                wordsShown.add(questionTextID);
+            }
 
             if (isNew){
                 selectorMessage.textContent = `${vocab[questionTextID].tamlish} means ${vocab[questionTextID].english}!`;
             }
             else{
                 selectorMessage.textContent = "";
+            }
+
+            const vocabTypeText = displayedSection.querySelector(".vocabType");
+
+            if (questionTextID.includes("w")){
+                vocabTypeText.textContent = "word";
+            }
+            else if (questionTextID.includes("p")){
+                vocabTypeText.textContent = "phrase";
             }
         }
     }

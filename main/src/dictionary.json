@@ -41,7 +41,7 @@
     "t1s3":{
         "type": "image",
         "answer": "option3",
-        "question": ["t1w2","tamlish"]
+        "question": ["t1p1","tamlish"]
     },
     "t1s4":{
         "type": "heardWord",

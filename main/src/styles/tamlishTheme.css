@@ -152,7 +152,7 @@ header{
     border-radius: 15px;
     position: absolute;
     top: 44px;
-    left: -8ch;
+    right: -6px;
     padding: 4px;
     gap: 12px;
 }
@@ -377,6 +377,10 @@ header{
     font-size: 13px;
     color: #0066ff;
 }
+#confirmationMessage{
+    color: #2263e6;
+    font-size: 15px;
+}
 
 #landingPage{
         background: linear-gradient(to bottom, 
@@ -415,7 +419,7 @@ header{
     line-height: 1.1;
     color: #0066ff;
     text-shadow: 0 0 40px rgba(156, 180, 243, 0.3);
-    width: 42vw;
+    width: 52vw;
 }
 #bannerBar{
     display: flex;
@@ -519,6 +523,13 @@ canvas{
 .italics{
     font-style: italic;
 }
+#activs #activitiesImgExample{
+    height: 400px;
+    width: 500px;
+}
+#exposureImgExample{
+    filter: hue-rotate(0deg) brightness(1.5) saturate(1.5);
+}
 
 @keyframes scroll-left{
     0%{
@@ -581,12 +592,14 @@ canvas{
     z-index: 1;
     color: #1a4fd6;
     margin-bottom: 20px;
+    font-size: 18px;
 }
 #localText{
     position: absolute;
     color: #1a4fd6;
     z-index: 1;
     margin-bottom: 20px;
+    font-size: 18px;
 }
 #touristSpeaker{
     background-color: rgb(137, 187, 255);
@@ -707,7 +720,7 @@ canvas{
 /* About page */
 
 .aboutSection{
-    color: black;
+    color: rgb(0, 94, 255);
 }
 
 
@@ -765,12 +778,16 @@ canvas{
 }
 .footerLinks:hover{
     text-decoration: underline;
-    color: blue;
+    color: white;
 }
 .footerLinks:visited{
     color: white;
 }
 #footerProductSummary{
     opacity: 0.8;
+}
+.reversed{
+    unicode-bidi: bidi-override; 
+    direction: rtl;
 }
 

@@ -150,6 +150,9 @@ textarea{
     color: rgb(27, 71, 247);
     background-color: #d6dff5;
 }
+textarea:focus{
+    outline: 2px solid #2752ff;
+}
 #lessonOverlay{
     position: absolute;
     background: transparent;
@@ -405,4 +408,29 @@ textarea{
 }
 .results{
     font-weight: 600;
+}
+.comingSoonText{
+    font-size: 32px;
+    color: rgb(0, 98, 255);
+    font-weight: 600;
+}
+#leaveBtn{
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: black;
+    transform: scale(1.2);
+    top: 13px;
+    right: 25px;
+    padding: 5px;
+    color: rgb(0, 72, 255);
+    align-self: flex-end;
+}
+.comingSoon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    gap: 40vh;
 }
