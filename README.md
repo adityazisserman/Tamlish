@@ -72,7 +72,7 @@ The website will be found at `127.0.0.1:5000` or `localhost:5000`
 
 To see Firestore (database), and authentication details e.g. local user emails, go to `127.0.0.1:4000` or `localhost:4000`
 
-Once emulators are ended all user data is cleared (as well as database)
+> Once emulators are ended all user data is cleared (as well as database)
 
 ### Deployment
 
@@ -83,6 +83,8 @@ firebase deploy
 ```
 
 Your website can be found at `https://your-project-id.web.app` or `https://your-project-id.firebaseapp.com`
+
+To access the Firebase console (to see actual database and authenticaiton data) go to https://console.firebase.google.com sign in, and navigate to your project
 
 ## Contributing
 
