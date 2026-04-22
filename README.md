@@ -7,7 +7,7 @@
 
 ## Overview
 
-Tamlish is a website designed for tourists to teach spoken Tamil in a easy and acceisibele way with relevant vocabulary and native audio.
+Tamlish is a website designed for tourists to teach spoken Tamil in a easy and accessible way with relevant vocabulary and native audio.
 
 Main features include:
 
@@ -88,4 +88,4 @@ To access the Firebase console (to see actual database and authenticaiton data) 
 
 ## Contributing
 
-Any issues or bugs can be reported [here](https://github.com/adityazisserman/Tamlish/issues) and additions are welcome. Just make a pull request [here](https://github.com/adityazisserman/Tamlish/pulls).
+Any issues or bugs can be reported [here](https://github.com/adityazisserman/Tamlish/issues) and any additions are welcome. Just make a pull request [here](https://github.com/adityazisserman/Tamlish/pulls).
