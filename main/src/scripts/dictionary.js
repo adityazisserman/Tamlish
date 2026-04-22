@@ -1,7 +1,5 @@
 import { auth, onAuthStateChanged, db, doc, getDocs, getDoc, collection, serverTimestamp } from "../firebase-config.js";
 
-const basePath = window.location.hostname === '127.0.0.1' ? '/main' : '';
-
 const wordsTableBody = document.getElementById("wordsTable").querySelector("tbody");
 const phrasesTableBody = document.getElementById("phrasesTable").querySelector("tbody");
 const wordsTable = document.getElementById("wordsTable");
@@ -29,7 +27,7 @@ const tableCache = {
     vocabVersion: "cachedVocabVersion",
     proficiency: "cachedProficiency"
 };
-const VOCAB_VERSION = "1.2.1"
+const VOCAB_VERSION = "1.2.2"
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -42,8 +40,7 @@ onAuthStateChanged(auth, async (user) => {
         // caching vocab data
         if (serverVocabVersion !== localVocabVersion || !localStorage.getItem(tableCache.vocab)){
             try {
-                const basePath = window.location.hostname === '127.0.0.1' ? '/main' : '';
-                const response = await fetch(`${basePath}/src/dictionary.json?v=${VOCAB_VERSION}`);
+                const response = await fetch(`/src/dictionary.json?v=${VOCAB_VERSION}`);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 vocab = await response.json();
                 localStorage.setItem(tableCache.vocab, JSON.stringify(vocab));
@@ -77,7 +74,7 @@ onAuthStateChanged(auth, async (user) => {
         console.log("phrasesArray:", phrasesArray);
         for (let id in vocab) {
             if (id.includes("w") || id.includes("p")){
-                const audio = new Audio(`${basePath}/src/audio/${id}.mp3`);
+                const audio = new Audio(`/src/audio/${id}.mp3`);
                 audio.load();
                 audioCache[id] = audio;
             }

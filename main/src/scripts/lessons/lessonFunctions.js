@@ -24,8 +24,7 @@ const imageCache = {}
 const wordsShown = new Set();
 
 async function fetchLessonData(){
-    const basePath = window.location.hostname === '127.0.0.1' ? '/main' : '';
-    const response = await fetch(`${basePath}/src/dictionary.json`);
+    const response = await fetch(`/src/dictionary.json`);
     const data = await response.json();
     vocab = data;
 
