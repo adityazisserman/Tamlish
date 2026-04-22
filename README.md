@@ -1,7 +1,7 @@
 <div align="center">
     <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/    983f2151-dcf2-491d-bb74-7bc73397e4b6"/>
-    <a href="https://tamlish-dev.web.app"><img alt="tamlish_logo" height=150px width= 500px src="https://github.com/user-attachments/assets/983f2151-dcf2-491d-bb74-7bc73397e4b6" /></a>
+    <a href="https://tamlish-dev.web.app" target="_blank"><img alt="tamlish_logo" height=150px width= 500px src="https://github.com/user-attachments/assets/983f2151-dcf2-491d-bb74-7bc73397e4b6" /></a>
     </picture>
 </div>
 
@@ -34,13 +34,15 @@ firebase login
 
 and sign up / log in
 
-Then:
+To create your Firebase project:
 
 ```
 firebase projects:create
 ```
 
-Choose a project id, and then:
+Choose a project id
+
+To connect the code to the project:
 
 ```
 firebase use --add
