@@ -1,7 +1,9 @@
-<picture align="center">
-<source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/983f2151-dcf2-491d-bb74-7bc73397e4b6"/>
-<a href="https://tamlish-dev.web.app"><img alt="tamlish_logo" height=150px width= 500px src="https://github.com/user-attachments/assets/983f2151-dcf2-491d-bb74-7bc73397e4b6" /></a>
-</picture>
+<div align="center">
+    <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/    983f2151-dcf2-491d-bb74-7bc73397e4b6"/>
+    <a href="https://tamlish-dev.web.app"><img alt="tamlish_logo" height=150px width= 500px src="https://github.com/user-attachments/assets/983f2151-dcf2-491d-bb74-7bc73397e4b6" /></a>
+    </picture>
+</div>
 
 ## Overview
 
