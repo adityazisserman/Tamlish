@@ -32,7 +32,7 @@ Within Tamlish directory:
 firebase login
 ```
 
-and sign up / log in
+> and sign up / log in
 
 To create your Firebase project:
 
@@ -48,7 +48,17 @@ To connect the code to the project:
 firebase use --add
 ```
 
-Choose the project id you just created
+> Choose the project id you just created
+
+To connect your project to Firebase:
+
+```
+firebase apps:sdkconfig WEB
+```
+
+Copy all config and paste into [firebase-config_demo.js](main\src\firebase-config_demo.js)
+
+Be sure to rename file to `firebase-config.js` after all details filled out
 
 ### Local Development with Emulation
 
