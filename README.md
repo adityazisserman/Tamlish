@@ -56,7 +56,7 @@ To connect your project to Firebase:
 firebase apps:sdkconfig WEB
 ```
 
-Copy all config and paste into [firebase-config_demo.js](/src/firebase-config_demo.js)
+Copy all config and paste into [firebase-config_demo.js]("https://github.com/adityazisserman/Tamlish/blob/main/main/src/firebase-config_demo.js")
 
 Be sure to rename file to `firebase-config.js` after all details filled out
 
