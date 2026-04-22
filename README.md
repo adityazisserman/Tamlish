@@ -40,7 +40,7 @@ To create your Firebase project:
 firebase projects:create
 ```
 
-> Decide on a project id (globally unique across all Firebase projects, so your desired id may be taken)
+> Decide on a project id (globally unique across all Firebase projects, so your desired project id may be taken)
 
 To connect the code to the project:
 
@@ -76,7 +76,7 @@ To see Firestore (database), and authentication details e.g. local user emails, 
 
 ### Deployment
 
-Once you are satisfied with local version, deploy website with:
+Once you are satisfied with your local version, deploy website with:
 
 ```
 firebase deploy
