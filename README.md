@@ -58,7 +58,7 @@ firebase apps:sdkconfig WEB
 
 Copy all config and paste into [firebase-config_demo.js](https://github.com/adityazisserman/Tamlish/blob/main/main/src/firebase-config_demo.js)
 
-Be sure to rename file to `firebase-config.js` after all details filled out
+Be sure to rename file to `firebase-config.js` after all the config is filled out
 
 ### Local Development with Emulation
 
@@ -84,7 +84,7 @@ firebase deploy
 
 Your website can be found at `https://your-project-id.web.app` or `https://your-project-id.firebaseapp.com`
 
-To access the Firebase console (to see actual database and authenticaiton data) go to https://console.firebase.google.com sign in, and navigate to your project
+To access the Firebase console (to see actual database and authentication data) go to https://console.firebase.google.com sign in, and navigate to your project
 
 ## Contributing
 
