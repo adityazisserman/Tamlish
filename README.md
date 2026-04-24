@@ -1,7 +1,7 @@
 <div align="center">
     <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/    983f2151-dcf2-491d-bb74-7bc73397e4b6"/>
-    <a href="https://tamlish-dev.web.app" target="_blank"><img alt="Image" height=150px width= 500px src="https://github.com/user-attachments/assets/983f2151-dcf2-491d-bb74-7bc73397e4b6" /></a>
+    <source media="(prefers-color-scheme: dark)" srcset="https://tamlish-dev.web.app/src/images/tamlish_logo.png"/>
+    <a href="https://tamlish-dev.web.app" target="_blank"><img alt="Image" height=150px width= 500px src="https://tamlish-dev.web.app/src/images/tamlish_logo.png" /></a>
     </picture>
 </div>
 
