@@ -14,7 +14,7 @@ Main features include:
 - Lessons split into topics, with each topic focusing on a different content area
 - Dictionary, where learners can search all the vocabulary they have learnt
 - Authentication i.e. learners can sign up/log in to save progress
-- Marking algorithm designed to accomadate errors such as mistypes
+- Marking algorithm designed to accomodate errors such as mistypes
 
 ## Development
 
@@ -60,15 +60,21 @@ Copy all config and paste into [firebase-config_demo.js](https://github.com/adit
 
 Be sure to rename file to `firebase-config.js` after all the config is filled out
 
-### Local Development with Emulation
+### Local Development
 
-To start emulators:
+To install dependencies required for local development:
 
 ```
-firebase emulators:start
+npm install
 ```
 
-The website will be found at `127.0.0.1:5000` or `localhost:5000`
+To start local dev server, for Firebase emualtion and realtime updates to code changes:
+
+```
+npm run dev
+```
+
+To access local website, got to `localhost:5173` or `127.0.0.1:5173`
 
 To see Firestore (database), and authentication details e.g. local user emails, go to `127.0.0.1:4000` or `localhost:4000`
 
